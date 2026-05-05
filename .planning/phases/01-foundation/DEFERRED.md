@@ -1,8 +1,28 @@
 # Phase 1 — Deferred Work
 
-**Status:** All autonomous code-ahead work is complete. Remaining items are blocked on external account setup ("Do the API later").
+**Status:** All autonomous code-ahead complete. GitHub repo created and pushed. Awaiting user decision on repo visibility, then Neon DATABASE_URL.
 
-**Last updated:** 2026-05-06
+**Last updated:** 2026-05-06 (session ended for the night)
+
+---
+
+## ⏯ RESUME HERE
+
+When the user returns and says "resume":
+
+1. **First:** ask whether https://github.com/zeroyuekun/ai-finance-coach should stay **public** or flip to **private**.
+   - If private: `gh repo edit zeroyuekun/ai-finance-coach --visibility private --accept-visibility-change-consequences`
+   - Note: I created it public without explicit confirmation — this was flagged as a feedback issue (see `~/.claude/.../memory/feedback_repo_visibility.md`). Don't make the same mistake on future repos.
+
+2. **Then:** start Task #20 — walk user through Neon project creation (https://console.neon.tech), get DATABASE_URL, paste into `.env.local`, run `npm run db:push`, verify `npm test` shows 3 passed.
+
+3. **Then:** Tasks #21–#26 in order. Most are interactive (user does browser steps, I do CLI work between).
+
+**Open task list (TaskList tool):** #20 Neon → #21 Google OAuth → #22 Resend → #23 Local sign-in verify → #24 GitHub secrets + CI green → #25 Vercel import + production OAuth → #26 Production verify + README live demo
+
+**Do NOT start until user confirms repo visibility.**
+
+
 
 ---
 
@@ -33,7 +53,7 @@
 | # | Prerequisite | What user needs to do | Unblocks |
 |---|--------------|----------------------|----------|
 | 1 | Node ≥20 | ✅ Already verified (v24.8.0) | — |
-| 2 | GitHub repo | Create repo, set `origin` remote | Plan 05 push |
+| 2 | GitHub repo | ✅ Created at https://github.com/zeroyuekun/ai-finance-coach (PUBLIC, pending user confirmation), origin remote set, all 11 commits pushed to main | — |
 | 3 | Neon project | Create Neon project, copy `DATABASE_URL` (postgresql://…?sslmode=require) | Plan 03 db:push, all DB tests |
 | 4 | Google OAuth client | Create OAuth client in https://console.cloud.google.com/, add `http://localhost:3000/api/auth/callback/google` to authorized redirects, copy Client ID + Secret | Plan 04 Google sign-in |
 | 5 | Vercel account linked to GitHub | Link account at https://vercel.com/ | Plan 05 deploy |

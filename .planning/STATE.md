@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: paused-on-prereqs
-stopped_at: All Phase 1 autonomous code-ahead complete. Plans 02–05 partially shipped — see .planning/phases/01-foundation/DEFERRED.md. Blocked on user API setup (GitHub, Neon, Google OAuth, Vercel, Resend).
-last_updated: "2026-05-06T05:00:00.000Z"
-last_activity: 2026-05-06 -- Plans 03/04/05 autonomous portions written, committed, verified (typecheck + lint + test all green)
+stopped_at: GitHub repo zeroyuekun/ai-finance-coach created (PUBLIC — pending user confirmation), 11 commits pushed. Awaiting visibility decision, then Neon DATABASE_URL. See .planning/phases/01-foundation/DEFERRED.md "RESUME HERE" section.
+last_updated: "2026-05-06T05:30:00.000Z"
+last_activity: 2026-05-06 -- gh repo create + push to origin/main; user retiring for the night
 progress:
   total_phases: 9
   completed_phases: 0
@@ -75,7 +75,7 @@ None at init. Note for `/gsd-plan-phase 1`: a 1196-line implementation plan alre
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| API setup | GitHub repo + origin remote | Pending user | 2026-05-06 |
+| API setup | GitHub repo + origin remote | ✅ Done (public, pending user visibility confirm) | 2026-05-06 |
 | API setup | Neon project + DATABASE_URL | Pending user | 2026-05-06 |
 | API setup | Google OAuth Client ID + Secret | Pending user | 2026-05-06 |
 | API setup | Vercel account linked to GitHub | Pending user | 2026-05-06 |
