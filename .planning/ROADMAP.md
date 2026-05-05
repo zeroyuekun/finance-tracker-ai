@@ -1,4 +1,4 @@
-# Roadmap: AI Finance Coach
+﻿# Roadmap: AI Finance Coach
 
 ## Overview
 
@@ -41,7 +41,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can sign in with an email magic-link (Resend) and lands on `/dashboard`
   4. Unauthenticated visit to `/dashboard` redirects to `/signin?callbackUrl=/dashboard`
   5. A `user` row is visible in production Neon Postgres after first signup, and CI (`lint + typecheck + test + build`) is green on `main`
-**Plans**: TBD
+**Plans:** 5 plans
+
+Plans:
+- [ ] 01-01-PLAN.md - External account prerequisites (Node, GitHub repo, Neon, Google OAuth, Vercel, Resend); 6 user-action checkpoints + PREREQS.md write
+- [ ] 01-02-PLAN.md - Project scaffold: Next.js 16 + strict TS + Tailwind v4 + Vitest sanity + shadcn/ui (Button/Card/Input/Label) + landing page
+- [ ] 01-03-PLAN.md - DB + Auth: Drizzle + Neon connection, Auth.js v5 schema (user/account/session/verificationToken), [BLOCKING] db:push, Auth.js v5 config (Google + Resend + DB sessions), middleware
+- [ ] 01-04-PLAN.md - Sign-in UI: signin page (Google + Resend forms), protected dashboard placeholder, sign-out button, landing CTA; manual local end-to-end verification
+- [ ] 01-05-PLAN.md - CI + Deploy: GitHub Actions workflow + secrets, Vercel project import + env vars, production OAuth callback, end-to-end production verification, README live demo URL
 
 **Source spec section:** SPEC §13 (weeks 1–2), §5.1, §11, §12
 **Existing implementation reference:** `docs/superpowers/plans/2026-05-06-phase-1-foundation.md` — a 1196-line, 9-task implementation plan already exists for this phase. When `/gsd-plan-phase 1` runs, it MUST consult this document and adapt rather than overwrite. The document covers prerequisites (P1–P6), file inventory (~30 files), Auth.js v5 standard schema (`user`, `account`, `session`, `verificationToken`), CI workflow at `.github/workflows/ci.yml`, and Vercel deployment steps.
