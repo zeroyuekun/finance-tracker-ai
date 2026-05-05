@@ -41,11 +41,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can sign in with an email magic-link (Resend) and lands on `/dashboard`
   4. Unauthenticated visit to `/dashboard` redirects to `/signin?callbackUrl=/dashboard`
   5. A `user` row is visible in production Neon Postgres after first signup, and CI (`lint + typecheck + test + build`) is green on `main`
-**Plans:** 5 plans
+**Plans:** 1/5 plans executed
 
 Plans:
 - [ ] 01-01-PLAN.md - External account prerequisites (Node, GitHub repo, Neon, Google OAuth, Vercel, Resend); 6 user-action checkpoints + PREREQS.md write
-- [ ] 01-02-PLAN.md - Project scaffold: Next.js 16 + strict TS + Tailwind v4 + Vitest sanity + shadcn/ui (Button/Card/Input/Label) + landing page
+- [x] 01-02-PLAN.md - Project scaffold: Next.js 16 + strict TS + Tailwind v4 + Vitest sanity + shadcn/ui (Button/Card/Input/Label) + landing page
 - [ ] 01-03-PLAN.md - DB + Auth: Drizzle + Neon connection, Auth.js v5 schema (user/account/session/verificationToken), [BLOCKING] db:push, Auth.js v5 config (Google + Resend + DB sessions), middleware
 - [ ] 01-04-PLAN.md - Sign-in UI: signin page (Google + Resend forms), protected dashboard placeholder, sign-out button, landing CTA; manual local end-to-end verification
 - [ ] 01-05-PLAN.md - CI + Deploy: GitHub Actions workflow + secrets, Vercel project import + env vars, production OAuth callback, end-to-end production verification, README live demo URL
@@ -181,7 +181,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 1/5 | In Progress|  |
 | 2. Transactions | 0/TBD | Not started | - |
 | 3. Categorization | 0/TBD | Not started | - |
 | 4. Goals & Dashboard | 0/TBD | Not started | - |
