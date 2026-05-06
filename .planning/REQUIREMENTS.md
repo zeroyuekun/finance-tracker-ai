@@ -1,4 +1,4 @@
-# Requirements: AI Finance Coach
+# Requirements: Finance Tracker AI
 
 **Defined:** 2026-05-06
 **Core Value:** A user can complete a 10-question CFP onboarding and have a tailored, framework-grounded conversation with an AI advisor whose math runs in deterministic TypeScript tools — and a recruiter can see the eval suite proving the advice is correct.

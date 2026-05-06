@@ -1,8 +1,8 @@
-# AI Finance Coach — Design Spec
+# Finance Tracker AI — Design Spec
 
 **Date:** 2026-05-06
 **Status:** Design — approved through brainstorming
-**Working name:** AI Finance Coach (rename TBD)
+**Working name:** Finance Tracker AI (rename TBD)
 **Target ship:** ~10 weeks at ~10–12 hrs/week
 
 ---
@@ -360,7 +360,7 @@ Live at https://<project>.vercel.app
 
 ## 16. Open questions
 
-- **Project name** — working title is "AI Finance Coach"; the user may rename before launch
+- **Project name** — working title is "Finance Tracker AI"; the user may rename before launch
 - **Custom domain** — buy a $12/yr domain or stay on `.vercel.app`?
 - **Open source license** — MIT recommended for portfolio visibility, but not required v1
 - **Public repo** — recommended (hiring signal); confirm no sensitive data in commits

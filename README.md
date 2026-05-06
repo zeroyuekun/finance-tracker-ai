@@ -1,4 +1,4 @@
-# AI Finance Coach
+# Finance Tracker AI
 
 A conversational AI advisor for personal finance — grounded in real CFP frameworks, not vibes.
 

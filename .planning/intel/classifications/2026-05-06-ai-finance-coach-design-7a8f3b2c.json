@@ -3,10 +3,10 @@
   "type": "SPEC",
   "confidence": "high",
   "manifest_override": true,
-  "title": "AI Finance Coach — Design Spec",
+  "title": "Finance Tracker AI — Design Spec",
   "summary": "Design specification for a conversational AI financial advisor web app with CFP-grade onboarding, framework-grounded advice, deterministic finance tools, and an eval suite.",
   "scope": [
-    "AI Finance Coach product",
+    "Finance Tracker AI product",
     "Next.js 16 web application",
     "Neon Postgres + Drizzle ORM data model",
     "Auth.js authentication",

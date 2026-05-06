@@ -1,4 +1,4 @@
-﻿# Roadmap: AI Finance Coach
+﻿# Roadmap: Finance Tracker AI
 
 ## Overview
 

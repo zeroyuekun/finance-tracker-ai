@@ -196,7 +196,7 @@ This is the canonical Phase 1 Definition of Done check (CONTEXT.md specifics ite
 
 **Resume protocol after Task 5 PASS:**
 
-Claude inserts after the `# AI Finance Coach` heading:
+Claude inserts after the `# Finance Tracker AI` heading:
 ```
 **Live demo:** <production URL>
 ```
@@ -212,7 +212,7 @@ Commit `docs(01-05): add live demo URL` and push. Phase 1 SHIPPED.
 
 Verified post-write:
 - `.github/workflows/ci.yml` exists with all required steps and env wiring
-- `README.md` contains `# AI Finance Coach`, stack one-liner, npm scripts, status line
+- `README.md` contains `# Finance Tracker AI`, stack one-liner, npm scripts, status line
 - `git remote get-url origin` returns the GitHub URL
 - `git ls-remote origin main` returns a SHA (push succeeded)
 - `git log origin/main --oneline` shows ≥ 11 commits

@@ -3,7 +3,7 @@
 **Generated:** 2026-05-06
 **Mode:** new
 **Precedence applied:** ADR > SPEC > PRD > DOC
-**Project:** AI Finance Coach (Next.js 16 + TypeScript + Postgres + Auth.js + Vercel AI SDK)
+**Project:** Finance Tracker AI (Next.js 16 + TypeScript + Postgres + Auth.js + Vercel AI SDK)
 
 ---
 

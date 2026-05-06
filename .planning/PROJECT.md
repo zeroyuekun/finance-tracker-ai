@@ -1,4 +1,4 @@
-# AI Finance Coach
+# Finance Tracker AI
 
 > **Project name status:** Working title. May be renamed before launch (see Open Questions below). All artifacts can be relabeled in place — the title is metadata, not a locked decision.
 
@@ -91,7 +91,7 @@ Success = all of the following are simultaneously true at the end of week 10:
 
 <!-- Tracked but not blocking. Resolve before launch where applicable. -->
 
-- **Project name** — "AI Finance Coach" is a working title; may rename before launch.
+- **Project name** — "Finance Tracker AI" is a working title; may rename before launch.
 - **Custom domain** — Buy a $12/yr domain or stay on `*.vercel.app`? Out of v1 budget either way.
 - **Open source license** — MIT recommended for portfolio visibility.
 - **Public repo** — Recommended (hiring signal); confirm no sensitive data in commits.

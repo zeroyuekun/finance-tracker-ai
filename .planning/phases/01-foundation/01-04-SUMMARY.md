@@ -78,7 +78,7 @@ completed_partial: 2026-05-06
 ## Accomplishments
 
 ### Sign-in page (`app/(auth)/signin/page.tsx`)
-- **Card layout** with title "Sign in to AI Finance Coach"
+- **Card layout** with title "Sign in to Finance Tracker AI"
 - **Google OAuth form** — single Button "Continue with Google" inside a `<form>` with server-action calling `signIn("google", { redirectTo: "/dashboard" })`. Outline variant, full width.
 - **Visual divider** — "or" between the two forms with absolute-positioned border-t
 - **Magic-link form** — Label + Input (`type="email"`, `name="email"`, required) + Button "Send magic link" inside a `<form>` with server-action calling `signIn("resend", { email, redirectTo: "/dashboard" })`. FormData lookup with `typeof email !== "string"` guard.
@@ -98,7 +98,7 @@ completed_partial: 2026-05-06
 
 ### Landing page (`app/page.tsx`)
 - **Replaced** the Plan 02 placeholder Button with a routed CTA
-- Heading "AI Finance Coach" (4xl, semibold, tracking-tight)
+- Heading "Finance Tracker AI" (4xl, semibold, tracking-tight)
 - Subtitle: "A conversational AI advisor grounded in real finance frameworks. Tracks your spending and gives advice tailored to your goals — not vibes."
 - `<Button asChild><Link href="/signin">Get started</Link></Button>` — radix Slot pattern, no nested `<a>` warnings
 
@@ -130,7 +130,7 @@ None. Task 1 implementation matches the plan's specified file content byte-for-b
 
 **Resume protocol after `db:push` succeeds and `.env.local` has real `AUTH_GOOGLE_ID/SECRET` + `AUTH_RESEND_KEY`:**
 
-1. **Pre-flight (Claude):** Start `npm run dev` in background. Wait 5s. `Invoke-WebRequest http://localhost:3000` → confirm HTTP 200, body contains "AI Finance Coach" + "Get started".
+1. **Pre-flight (Claude):** Start `npm run dev` in background. Wait 5s. `Invoke-WebRequest http://localhost:3000` → confirm HTTP 200, body contains "Finance Tracker AI" + "Get started".
 2. **User in incognito browser, report PASS/FAIL for each:**
    1. Visit http://localhost:3000 → click "Get started" → lands on /signin with Card, Google button, and email form
    2. Visit http://localhost:3000/dashboard while signed out → redirected to /signin?callbackUrl=%2Fdashboard

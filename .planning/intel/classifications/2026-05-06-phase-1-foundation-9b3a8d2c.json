@@ -3,7 +3,7 @@
   "type": "DOC",
   "confidence": "high",
   "manifest_override": true,
-  "title": "AI Finance Coach — Phase 1: Foundation Implementation Plan",
+  "title": "Finance Tracker AI — Phase 1: Foundation Implementation Plan",
   "summary": "Phase 1 foundation implementation plan with 9 tasks covering Next.js scaffold, Vitest, shadcn/ui, Drizzle+Neon, Auth.js v5, CI, and Vercel deployment.",
   "scope": [
     "Next.js 16 App Router",

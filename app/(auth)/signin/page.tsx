@@ -9,7 +9,7 @@ export default function SignInPage() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Sign in to AI Finance Coach</CardTitle>
+          <CardTitle>Sign in to Finance Tracker AI</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
           <form

@@ -130,7 +130,7 @@
 
 - **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §16
 - **Notes:**
-  - Project name — working title is "AI Finance Coach"; may rename before launch
+  - Project name — working title is "Finance Tracker AI"; may rename before launch
   - Custom domain — buy a $12/yr domain or stay on `.vercel.app`?
   - Open source license — MIT recommended for portfolio visibility
   - Public repo — recommended (hiring signal); confirm no sensitive data in commits

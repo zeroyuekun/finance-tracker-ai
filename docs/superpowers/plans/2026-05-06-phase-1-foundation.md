@@ -1,4 +1,4 @@
-# AI Finance Coach — Phase 1: Foundation Implementation Plan
+# Finance Tracker AI — Phase 1: Foundation Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -306,7 +306,7 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-8">
-      <h1 className="text-3xl font-semibold">AI Finance Coach</h1>
+      <h1 className="text-3xl font-semibold">Finance Tracker AI</h1>
       <p className="text-muted-foreground">Conversational, framework-grounded budgeting.</p>
       <Button>Get started</Button>
     </main>
@@ -779,7 +779,7 @@ export default function SignInPage() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Sign in to AI Finance Coach</CardTitle>
+          <CardTitle>Sign in to Finance Tracker AI</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
           <form
@@ -868,7 +868,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-8">
       <div className="flex flex-col items-center gap-3 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight">AI Finance Coach</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Finance Tracker AI</h1>
         <p className="max-w-xl text-muted-foreground">
           A conversational AI advisor grounded in real finance frameworks.
           Tracks your spending and gives advice tailored to your goals — not vibes.
@@ -990,7 +990,7 @@ jobs:
 Replace `README.md` content with:
 
 ````markdown
-# AI Finance Coach
+# Finance Tracker AI
 
 A conversational AI advisor for personal finance — grounded in real CFP frameworks, not vibes.
 
