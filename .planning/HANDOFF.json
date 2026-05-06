@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "saved_at": "2026-05-07T00:10:00Z",
+  "saved_at_local": "2026-05-07 (user said 'going sleep')",
+  "status": "paused-on-vercel-build-failure",
+  "phase": "01-foundation",
+  "plan": "01-05",
+  "task": 4,
+  "total_tasks": 6,
+  "next_action": "User reports back from Vercel: either 'redeploying via UI' (after fixing env var Production scope) or 'go cli' (let Claude run vercel link + vercel env ls read-only verification).",
+
+  "completed_tasks": [
+    {"id": "01-05-task-1", "name": "CI workflow YAML + README + git push", "status": "done", "commit": "b841341"},
+    {"id": "01-05-task-2", "name": "6 GitHub repository secrets", "status": "done", "completed_at": "2026-05-06T11:42Z", "verified_via": "gh secret list"},
+    {"id": "01-05-task-3", "name": "CI green on main", "status": "done", "completed_at": "2026-05-06T12:36Z", "verified_via": "gh run list", "run_id": "25433094060"}
+  ],
+
+  "blockers": [
+    {
+      "id": "vercel-build-env-vars",
+      "description": "First Vercel deploy attempt failed at Next.js 'Collecting page data' phase with 'DATABASE_URL is not set'. The 7 env vars added during the import wizard either (a) did not get saved to Production scope, or (b) only got saved to Preview/Development. Next.js production build needs Production env vars at build time because lib/db/index.ts:5-8 throws synchronously on module load and lib/auth imports it.",
+      "evidence": "Build log timestamp 23:08:01.886 from user's paste — error at app/api/auth/[...nextauth]/route.js:6:3, identical stack to pre-secrets CI failures (e.g. run 25416302675).",
+      "severity": "blocking",
+      "owner": "user-action"
+    }
+  ],
+
+  "human_actions_pending": [
+    {
+      "id": "fix-vercel-env-vars",
+      "what": "Open Vercel dashboard → finance-tracker-ai → Settings → Environment Variables. Verify all 7 keys are present AND have Production ticked (plus Preview + Development). Add any missing rows from .env.local. Then Deployments → ⋯ menu on failed deploy → Redeploy (uncheck 'Use existing Build Cache').",
+      "keys_required": [
+        "DATABASE_URL",
+        "AUTH_SECRET",
+        "AUTH_GOOGLE_ID",
+        "AUTH_GOOGLE_SECRET",
+        "AUTH_RESEND_KEY",
+        "AUTH_EMAIL_FROM",
+        "AUTH_TRUST_HOST"
+      ],
+      "values_source": "First 6 from C:\\Users\\Admin\\projects\\finance-tracker-ai\\.env.local; AUTH_TRUST_HOST is the literal string 'true' (not a secret).",
+      "alternative": "If user prefers, Claude can run `vercel link --yes --project finance-tracker-ai` then `vercel env ls` (read-only) to enumerate what is actually attached. Then with explicit per-action authorization, `vercel env add <KEY> production` to fill gaps and `vercel redeploy <prod-url>` to retry."
+    }
+  ],
+
+  "uncommitted_files": [],
+
+  "context_notes": [
+    "Session 3 (2026-05-06 → 2026-05-07): user said 'continue with my finance tracker AI I accidentally closed cursor'. Found that DEFERRED.md and STATE.md were stale — secrets had been added to GitHub at 11:42Z and CI was green at 12:36Z but docs still said 'awaiting GitHub secrets'. Reconciled in commit c5ec4fd.",
+    "User chose Path A (Vercel UI) over Path B (Vercel CLI) per their existing preference (memory: feedback_external_writes_need_authorization.md). Confirmed before any external-state writes.",
+    "Vercel CLI is authed as `nevillezeng-4064` on team `nevillezeng-4064s-projects` (saw `vercel ls` output). The new project will live in that scope.",
+    "Only 1 user row in production Neon (user nevillezeng@gmail.com 'Neville Zeng' from local Plan 04 verification 2026-05-06). Production verify will add 1+ more rows once deploy succeeds.",
+    "Phase 1 Definition of Done = all 13 items in 01-CONTEXT.md specifics block. After Vercel deploy succeeds, remaining items are: production sign-in (Google OAuth) PASS, magic-link in production PASS, prod Neon user row, README live demo URL line."
+  ],
+
+  "remaining_tasks_after_unblock": [
+    {"id": "01-05-task-4-deploy", "what": "Confirm Vercel deploy succeeds + capture production URL", "needs": "user redeploy completes green"},
+    {"id": "01-05-task-4-oauth", "what": "Add https://<prod-domain>/api/auth/callback/google to GCP Authorized redirect URIs", "needs": "user does it in GCP Console"},
+    {"id": "01-05-task-5", "what": "7-step end-to-end production verification (HTTP 200, signin link, /dashboard redirect, Google OAuth, sign-out, magic-link, prod user row)", "needs": "claude pre-flights + user runs incognito browser checks"},
+    {"id": "01-05-task-6", "what": "Insert '**Live demo:** <prod-url>' line under # Finance Tracker AI heading in README, commit `docs(01-05): add live demo URL`, push", "needs": "task 5 PASS"},
+    {"id": "01-05-summary-finalize", "what": "Update 01-05-SUMMARY.md status from partial-complete to complete; record final commits and 7-step verification results", "needs": "tasks 4-6 done"},
+    {"id": "01-04-summary-touch", "what": "Optional: 01-04-SUMMARY.md still has 'partial-complete' status text in its bottom matter even though body is fully marked complete; can fix during next housekeeping pass", "needs": "low priority"},
+    {"id": "phase-1-shipped", "what": "Phase 1 Definition of Done — verify all 13 items in 01-CONTEXT.md specifics; mark Phase 1 complete in ROADMAP.md; ready for Phase 2 (Transactions)", "needs": "all of above"}
+  ],
+
+  "resume_protocol": "On next session, run /gsd-resume-work or check this HANDOFF.json. The single decision point is: did the user fix env vars in Vercel UI and redeploy succeed, or do they want CLI verification? Branch on user response."
+}

@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: paused-on-vercel-deploy
-stopped_at: Plan 01-05 Tasks 1–3 complete (CI YAML + README + 6 GitHub secrets + green CI on `main`). Awaiting Vercel import + 7 env vars + production OAuth callback + 7-step prod verification. See DEFERRED.md (Path A vs Path B decision pending).
-last_updated: "2026-05-06T21:55:00.000Z"
-last_activity: 2026-05-06 -- session 3 resume: confirmed 6 GitHub secrets set 11:42Z and last CI run green for b276232 at 12:36Z; refreshed DEFERRED + STATE + 01-05-SUMMARY
+status: paused-on-vercel-build-failure
+stopped_at: Plan 01-05 Task 4 in progress. User started Vercel UI import; first build attempt FAILED at "Collecting page data" with `DATABASE_URL is not set` — env vars not on Production scope (or not saved). User going to sleep; will fix env vars in Vercel dashboard and redeploy next session. See HANDOFF.json + DEFERRED.md.
+last_updated: "2026-05-07T00:10:00.000Z"
+last_activity: 2026-05-06/07 -- Vercel UI deploy attempt 1 failed; diagnosis = env var Production scope missing; HANDOFF.json written for resumption
 progress:
   total_phases: 9
   completed_phases: 0
@@ -94,6 +94,7 @@ Full punch list with resume order: `.planning/phases/01-foundation/DEFERRED.md`
 
 ## Session Continuity
 
-Last session: 2026-05-06 — session 3 resume after cursor closed; reconciled stale docs against live state (secrets + CI green confirmed via `gh`)
-Stopped at: Awaiting user choice for Vercel deploy method (Path A — Vercel UI as originally planned, or Path B — Vercel CLI with per-action authorization). All prereqs satisfied; only deploy + prod verify + README live demo line remain.
-Resume file: `.planning/phases/01-foundation/DEFERRED.md`
+Last session: 2026-05-06 / 2026-05-07 — session 3 resume after cursor closed; reconciled stale docs (secrets + CI green confirmed); user chose Vercel UI; first deploy build failed on env var Production scope. User going to sleep.
+Stopped at: User to fix env vars in Vercel dashboard (Settings → Environment Variables → ensure all 7 ticked for Production) and redeploy. Build is otherwise healthy (TypeScript + lint + compile all pass on Vercel). Alternative path: `vercel link` + `vercel env ls` for CLI verification.
+Resume file: `.planning/HANDOFF.json` (primary) + `.planning/phases/01-foundation/DEFERRED.md`
+Next greeting: "Welcome back. Vercel deploy attempt 1 failed on env var scope. Did you redeploy via UI, or want me to run `vercel env ls` to inspect?"

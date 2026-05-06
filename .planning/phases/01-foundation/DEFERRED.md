@@ -1,8 +1,8 @@
 # Phase 1 — Deferred Work
 
-**Status:** Plan 01-04 complete (live auth flow end-to-end verified). Plan 01-05 Tasks 1–3 complete (CI green on `main`). Awaiting Vercel deploy → production verification → README live demo.
+**Status:** Plan 01-04 complete. Plan 01-05 Tasks 1–3 complete (CI green on `main`). Plan 01-05 Task 4 IN PROGRESS — Vercel UI import attempted; first build failed at "Collecting page data" with `DATABASE_URL is not set`. Diagnosed: env vars not attached to Production scope. User going to sleep; will fix dashboard config + redeploy next session.
 
-**Last updated:** 2026-05-06 (session 3 — secrets + CI green confirmed; only Vercel deploy + prod verify remain)
+**Last updated:** 2026-05-07 (session 3 paused — Vercel deploy attempt 1 failed, awaiting env var fix + redeploy)
 
 ---
 
@@ -16,25 +16,32 @@ Task #3 (Resend) ✅ done — API key wired, `onboarding@resend.dev` as sender.
 Task #4 (Local sign-in verify) ✅ done 2026-05-06 — all 6 browser steps PASS, 1 user row in Neon.
 Task #5 (GitHub secrets + CI green) ✅ done 2026-05-06 — 6 secrets present (`gh secret list` confirms `DATABASE_URL`, `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_RESEND_KEY`, `AUTH_EMAIL_FROM` set 2026-05-06T11:42Z); latest CI run for `b276232` (feat(01-04): live sign-in flow verified end-to-end) = ✅ success in 56s at 12:36Z.
 
-**Next entry point:** Task #6 — Vercel deploy + 7 env vars + production OAuth callback.
+**Next entry point:** Task #6 — Vercel deploy. User chose Path A (Vercel UI) and started import; **first build attempt FAILED** with `DATABASE_URL is not set` at "Collecting page data" phase (timestamp 23:08:01.886, error stack at `app/api/auth/[...nextauth]/route.js:6:3`). Identical failure mode to pre-secrets CI runs — `lib/db/index.ts:5-8` throws synchronously when env var is empty.
 
-Two viable paths (decision pending):
+**Root cause:** The 7 env vars added during the Vercel import wizard either weren't saved or weren't attached to the **Production** environment. Vercel uses Production-scope env vars at build time for production deploys.
 
-**Path A — Vercel UI (original plan):**
-1. User opens https://vercel.com/new and imports `zeroyuekun/finance-tracker-ai`.
-2. Before clicking Deploy, in env vars panel adds all 7 vars (Production / Preview / Development):
-   - `DATABASE_URL`, `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_RESEND_KEY`, `AUTH_EMAIL_FROM` from `.env.local`
-   - `AUTH_TRUST_HOST=true` (plain value)
-3. Click Deploy. Capture production URL. Reply with URL.
-4. Add `https://<prod-domain>/api/auth/callback/google` to Google OAuth Authorized redirect URIs.
+**Resume protocol (next session):**
 
-**Path B — Vercel CLI (faster, but each step requires explicit user authorization):**
-1. `vercel link` (associates this directory with a new Vercel project).
-2. `vercel env add <KEY> <ENV>` × 7 vars × 3 envs (or paste values via stdin).
-3. `vercel --prod` to deploy.
-4. User adds Google OAuth production callback in GCP (still browser-driven).
+1. User opens **Vercel dashboard → finance-tracker-ai → Settings → Environment Variables**
+2. Verifies all 7 keys present, each with **Production + Preview + Development** ticked:
+   - `DATABASE_URL`, `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_RESEND_KEY`, `AUTH_EMAIL_FROM` (values from `.env.local`)
+   - `AUTH_TRUST_HOST` = literal `true`
+3. Adds any missing rows; for existing rows missing Production scope, edits → ticks Production → Save.
+4. **Deployments tab → ⋯ on failed deploy → Redeploy** (uncheck "Use existing Build Cache").
+5. Replies with the production URL once green.
 
-After deploy, proceed to Task #7 — Production verify + README live demo + 01-05 SUMMARY.
+**Alternative — Path B fallback (Claude-driven CLI):**
+
+If user prefers, Claude can run (read-only first):
+```powershell
+vercel link --yes --project finance-tracker-ai
+vercel env ls
+```
+This enumerates what's actually attached without writing. With explicit per-action authorization, follow up with `vercel env add` for any missing keys + `vercel redeploy <url>` to retry.
+
+After deploy succeeds:
+- Task #4b — Add `https://<prod-domain>/api/auth/callback/google` to Google OAuth Authorized redirect URIs (GCP Console, browser-driven).
+- Task #7 — Production verify + README live demo + 01-05 SUMMARY.
 
 **Open task list (TaskList tool, ID order):**
 1. Neon: get DATABASE_URL and run db:push ✅
