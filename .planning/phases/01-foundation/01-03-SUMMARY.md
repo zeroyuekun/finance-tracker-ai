@@ -1,7 +1,7 @@
 ---
 phase: 01-foundation
 plan: 03
-status: partial-complete
+status: complete
 subsystem: db+auth
 tags: [drizzle, neon, auth.js, next-auth-v5, postgres, schema, migration]
 
@@ -75,21 +75,21 @@ requirements-completed: []
 requirements-partial: [REQ-auth]   # auth schema + config done, but live verification deferred (Plan 04 Task 2 manual checks)
 
 # Metrics
-duration: ~25min (autonomous code-ahead)
-completed_partial: 2026-05-06
+duration: ~25min code-ahead + ~5min db:push
+completed: 2026-05-06
 ---
 
 # Phase 1 Plan 3: Drizzle ORM + Neon + Auth.js v5 Schema + Config Summary
 
-**Drizzle ORM wired to Neon, Auth.js v5 standard schema defined and migration generated, Auth.js configured with Google OAuth + Resend magic-link + database session strategy, and Next 16 proxy.ts protects /dashboard/*. Live `db:push` deferred until user provides real DATABASE_URL.**
+**Drizzle ORM wired to Neon, Auth.js v5 standard schema defined and migration generated and applied to live Neon DB, Auth.js configured with Google OAuth + Resend magic-link + database session strategy, and Next 16 proxy.ts protects /dashboard/*. All 3 tests (sanity + db connection + schema integrity) passing.**
 
-## Status: PARTIAL — code complete, blocked on user-driven prereqs
+## Status: COMPLETE
 
 | Plan 03 Task | Status | Commit |
 |--------------|--------|--------|
 | Task 1: Install Drizzle/Neon/Auth deps + .env files + db client + connection test | ✅ Done | `8fb8851` (combined with Task 2) |
 | Task 2: Define Auth.js v5 schema + generate migration | ✅ Done | `8fb8851` |
-| Task 3: [BLOCKING] Push schema to Neon + schema integrity test | ⏸ DEFERRED — code written (tests/schema.test.ts), `db:push` blocked on real DATABASE_URL | — |
+| Task 3: [BLOCKING] Push schema to Neon + schema integrity test | ✅ Done 2026-05-06 — `npm run db:push --force` applied 4 CREATE TABLE statements to Neon; `tests/setup.ts` added so vitest loads `.env.local`; `npm test` now shows **3 passed** | (rename batch commit) |
 | Task 4: Configure Auth.js v5 + route handler + proxy.ts | ✅ Done (with deviation: proxy.ts replaces middleware.ts per Next 16) | `b9321f5` |
 
 ## Performance
@@ -165,23 +165,16 @@ completed_partial: 2026-05-06
 - **drizzle-kit's auto-naming convention is non-deterministic** (random adjective+noun). For a portfolio repo where commit messages reference specific tasks, this is mildly inconvenient but not worth fighting — the journal makes filenames effectively opaque to the runtime.
 - **Auth.js v5 still in beta (5.0.0-beta.31).** The API has been stable across recent betas, but downstream phases should pin if a breaking change lands. Track via `npm outdated next-auth`.
 
-## Open Issues / Deferred Work
+## Resolved Issues (2026-05-06 session)
 
-### [BLOCKING for full verification] Live `db:push` to Neon
-**Status:** Code-ahead committed (schema + migration + skipIf-guarded tests). Live push deferred.
+### ✅ db:push to Neon applied
+User created Neon project via `npx neonctl@latest init` and pasted the pooled connection string. Claude updated `.env.local`, ran `npm run db:push --force` (the `--force` flag was needed because `drizzle.config.ts` has `strict: true`, which forces a TTY confirmation prompt that fails non-interactively). Output ended with `[✓] Changes applied` after generating CREATE TABLE statements for `user`, `account`, `session`, `verificationToken` plus FK constraints.
 
-**To resume after user provides DATABASE_URL:**
+### ✅ Tests now connect to Neon
+The skipIf-guarded tests were not running even after the real DATABASE_URL landed. Root cause: vitest's `import "dotenv/config"` loads `.env` (default), not `.env.local`, so `process.env.DATABASE_URL` was undefined inside the test process and `hasNeonUrl` evaluated false. Fix: added `tests/setup.ts` that calls `dotenv.config({ path: ".env.local", override: false, quiet: true })` and registered it as `setupFiles: ["tests/setup.ts"]` in `vitest.config.ts`. CI is unaffected (env vars come from GitHub secrets via workflow YAML; `.env.local` doesn't exist in CI). `npm test` now shows **3 passed (3)**.
 
-1. User pastes `postgresql://...?sslmode=require` from Neon dashboard.
-2. Claude updates `.env.local` (replace placeholder DATABASE_URL line).
-3. Run `npm run db:push` — drizzle-kit reads from `.env.local` via `dotenv/config` in `drizzle.config.ts`, applies `0000_lively_tenebrous.sql` to fresh Neon DB. Expected: "Created table user", "Created table account", "Created table session", "Created table verificationToken" + "Changes applied".
-4. Run `npm test` — the skipIf gate in db.test.ts and schema.test.ts will detect the real `neon.tech` host and execute. Expected: **3 passed** (sanity + db connection + schema integrity).
-5. If schema test fails (tables not created), re-run step 3.
-6. Commit any drift: `git commit -am "test(01-03): activate live-DB tests after db:push"`.
-7. Mark Task 3 done.
-
-### [BLOCKING for full verification] User-supplied Auth.js credentials
-The auth config compiles and types correctly with placeholder env vars (TypeScript only checks shapes, not values). Live OAuth flow verification is Plan 04 Task 2 (six manual browser checks).
+## Remaining for full Plan 04 verification
+Live OAuth flow verification (Plan 04 Task 2 — six manual browser checks) still requires user-supplied AUTH_GOOGLE_ID/SECRET + AUTH_RESEND_KEY.
 
 ## Next Phase Readiness
 
@@ -197,9 +190,9 @@ The auth config compiles and types correctly with placeholder env vars (TypeScri
 - New domain tables (transactions, goals, intake, etc.) go in `lib/db/schema.ts` alongside the auth tables — single schema file pattern
 - `drizzle-kit push` is fine for Phase 1 fresh-DB scenarios; Phase 2+ should switch to `db:generate` + `db:migrate` (file-based) to avoid prod data loss risk
 
-## Self-Check: PARTIAL PASS
+## Self-Check: PASS
 
-Verified post-write:
+Verified post-write + post-db:push:
 - All 8 created files exist and contain expected exports/content
 - `lib/db/schema.ts` exports `users`, `accounts`, `sessions`, `verificationTokens` (4 named exports, all pgTable calls)
 - `lib/auth.ts` exports `handlers, signIn, signOut, auth` and configures DrizzleAdapter + Google + Resend + DB sessions + /signin pages
@@ -207,13 +200,14 @@ Verified post-write:
 - `proxy.ts` matcher is `["/dashboard/:path*"]`, redirect target is `/signin?callbackUrl=...`
 - `drizzle/0000_lively_tenebrous.sql` contains CREATE TABLE for account/session/user/verificationToken
 - `package.json` scripts include `db:generate`, `db:migrate`, `db:push`, `db:studio`
-- `git ls-files .env.local` is empty
-- `npm run typecheck` exits 0; `npm run lint` exits 0; `npm test` exits 0 (1 passed, 2 skipped)
-- Two task commits in git log: `8fb8851`, `b9321f5`
-- **NOT verified (deferred):** Live tables in Neon, schema test passing with 3 tests, OAuth/magic-link sign-in flows
+- `git ls-files .env.local` is empty (gitignored, NOT committed)
+- `npm run typecheck` exits 0; `npm run lint` exits 0; `npm test` exits 0 with **3 passed**
+- Live Neon DB has all 4 tables + FK constraints (verified by `tests/schema.test.ts` querying information_schema)
+- Two task commits + setup file commit in git log: `8fb8851`, `b9321f5`, plus rename-batch commit
+- **Live OAuth/magic-link sign-in still pending:** Plan 04 Task 2 (browser verification)
 
 ---
 *Phase: 01-foundation*
 *Plan: 03*
-*Status: partial-complete (3/4 tasks done; Task 3 db:push deferred)*
+*Status: complete (all 4 tasks done; live DB connectivity confirmed)*
 *Last updated: 2026-05-06*

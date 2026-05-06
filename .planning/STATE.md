@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: paused-on-prereqs
-stopped_at: User confirmed repo visibility = PUBLIC. SUMMARY.md docs written for Plans 03/04/05 (all partial-complete, code-ahead committed). Awaiting Neon DATABASE_URL → Google OAuth → Resend → Vercel. See .planning/phases/01-foundation/DEFERRED.md "RESUME HERE" section.
-last_updated: "2026-05-06T13:45:00.000Z"
-last_activity: 2026-05-06 -- visibility resolved (public); 01-03/01-04/01-05 SUMMARY.md docs written; verified npm typecheck+lint+test green
+stopped_at: Project renamed "Finance Tracker AI" (display + repo zeroyuekun/finance-tracker-ai + SPEC). Plan 01-03 fully complete (Neon DATABASE_URL applied, db:push succeeded, 3 tests passing). Awaiting Google OAuth + Resend credentials. See DEFERRED.md "RESUME HERE".
+last_updated: "2026-05-06T14:20:00.000Z"
+last_activity: 2026-05-06 -- project rename + Neon db:push + tests/setup.ts (vitest .env.local loader) + 3 tests passing
 progress:
   total_phases: 9
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
-  percent: 11
+  completed_plans: 2
+  percent: 22
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 1 (Foundation) — PAUSED ON PREREQS
-Plan: 1 fully complete (02), 3 partially shipped (03/04/05) pending API setup. SUMMARY.md docs written for all four plans.
-Status: Paused on user-driven external account creation (Neon → Google OAuth → Resend → Vercel)
-Last activity: 2026-05-06 -- visibility resolved public; SUMMARY.md docs landed for 01-03/01-04/01-05; verified typecheck+lint+test still green
+Plan: 2 fully complete (02 + 03), 2 partially shipped (04/05) pending Google OAuth + Resend.
+Status: Paused on Google OAuth + Resend setup
+Last activity: 2026-05-06 -- project renamed to "Finance Tracker AI" (display + repo + SPEC); Neon DATABASE_URL applied; 3 tests passing; vitest .env.local loader added
 
-Progress: [██░░░░░░░░] ~20% (1 of 5 plans done; 3 plans ~70% done pending API)
+Progress: [████░░░░░░] ~22% (2 of 5 plans done; 2 plans ~70% done pending API)
 
 **See:** `.planning/phases/01-foundation/DEFERRED.md` for the resume punch list.
 
@@ -76,11 +76,11 @@ None at init. Note for `/gsd-plan-phase 1`: a 1196-line implementation plan alre
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
 | API setup | GitHub repo + origin remote | ✅ Done (PUBLIC, user confirmed 2026-05-06) | 2026-05-06 |
-| API setup | Neon project + DATABASE_URL | Pending user | 2026-05-06 |
+| API setup | Neon project + DATABASE_URL | ✅ Done 2026-05-06 (via neonctl init) | 2026-05-06 |
 | API setup | Google OAuth Client ID + Secret | Pending user | 2026-05-06 |
 | API setup | Vercel account linked to GitHub | Pending user | 2026-05-06 |
 | API setup | Resend API key + verified sender | Pending user | 2026-05-06 |
-| Verification | `npm run db:push` to live Neon | Blocked on DATABASE_URL | 2026-05-06 |
+| Verification | `npm run db:push` to live Neon | ✅ Done 2026-05-06 (--force flag; 4 tables created) | 2026-05-06 |
 | Verification | 6-step local sign-in browser test | Blocked on auth provider keys | 2026-05-06 |
 | Deploy | `git push -u origin main` | Blocked on GitHub remote | 2026-05-06 |
 | Deploy | 6 GitHub repo secrets | Blocked on GitHub remote | 2026-05-06 |

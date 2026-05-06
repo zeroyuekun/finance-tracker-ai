@@ -1,26 +1,32 @@
 # Phase 1 — Deferred Work
 
-**Status:** All autonomous code-ahead complete. SUMMARY.md docs written for Plans 03/04/05. GitHub repo public (user-confirmed 2026-05-06). Awaiting Neon DATABASE_URL.
+**Status:** Project renamed to "Finance Tracker AI" (display + repo + SPEC). Neon DATABASE_URL applied + 3 tests passing. Awaiting Google OAuth + Resend credentials.
 
-**Last updated:** 2026-05-06 (session 2 — visibility resolved, SUMMARY docs landed)
+**Last updated:** 2026-05-06 (session 2 — Neon live, project renamed, repo at zeroyuekun/finance-tracker-ai)
 
 ---
 
 ## ⏯ RESUME HERE
 
 Visibility ✅ resolved (public, user-confirmed 2026-05-06).
+Project rename ✅ done — display name "Finance Tracker AI", repo `zeroyuekun/finance-tracker-ai`, SPEC file renamed.
+Task #1 (Neon) ✅ done — DATABASE_URL applied, `db:push` succeeded with `--force`, vitest setup file `tests/setup.ts` loads `.env.local`, `npm test` shows 3 passed.
 
-**Next entry point:** Task #1 in TodoList — Neon DATABASE_URL.
+**Next entry point:** Task #2 in TodoList — Google OAuth Client ID + Secret.
 
-1. User creates Neon project at https://console.neon.tech (Sydney region recommended, free Hobby tier, project name `ai-finance-coach`).
-2. User pastes pooled connection string. Claude:
-   - Edits `.env.local` line 6 — replace placeholder `DATABASE_URL=` with the real one.
-   - Runs `npm run db:push` — applies `drizzle/0000_lively_tenebrous.sql` against the live DB.
-   - Runs `npm test` — expect **3 passed** (skipIf gates auto-trigger when host matches `neon.tech`).
-   - Commits any drift: `git commit -am "test(01-03): activate live-DB tests after db:push"` (only if test files changed).
-   - Marks Task #1 done in TodoList; updates `01-03-SUMMARY.md` status from `partial-complete` → `complete`.
+1. User creates Google OAuth client at https://console.cloud.google.com → APIs & Services → Credentials → Create Credentials → OAuth Client ID → Web application.
+   - Authorized JavaScript origins: `http://localhost:3000`
+   - Authorized redirect URIs: `http://localhost:3000/api/auth/callback/google`
+   - (Production domain redirect added later in Task #6 after Vercel deploy.)
+2. User pastes Client ID + Client Secret. Claude updates `.env.local` lines `AUTH_GOOGLE_ID=` and `AUTH_GOOGLE_SECRET=`.
 
-3. Then Tasks #2–#7 in order (Google OAuth → Resend → local sign-in verify → GitHub secrets + CI green → Vercel import + production OAuth → production verify + README live demo).
+Then Task #3 — Resend API key:
+1. User creates account at https://resend.com → API Keys → Create API Key (permission: "Sending access").
+2. User pastes API key (starts with `re_`). Claude updates `.env.local` line `AUTH_RESEND_KEY=`. `AUTH_EMAIL_FROM=onboarding@resend.dev` already set (Resend's default sender, no domain verification needed for v1).
+
+Then Task #4 — Local 6-step browser sign-in verification.
+
+Then Tasks #5–#7 (GitHub secrets + CI green → Vercel deploy → production verify + README live demo).
 
 **Open task list (TaskList tool, ID order):**
 1. Neon: get DATABASE_URL and run db:push
@@ -40,14 +46,14 @@ Visibility ✅ resolved (public, user-confirmed 2026-05-06).
 | Plan | Wave | Status | Commits |
 |------|------|--------|---------|
 | 01-02 | 2 | ✅ Complete | 4 (a7912e6, 8901c22, d8ae1a3, f99d617) |
-| 01-03 | 3 | 🟡 Partial — code written, [BLOCKING] db:push deferred | 2 (8fb8851, b9321f5) |
+| 01-03 | 3 | ✅ Complete — code + db:push + 3 tests passing | 2 (8fb8851, b9321f5) + setup file commit |
 | 01-04 | 4 | 🟡 Partial — UI written, manual browser verify deferred | 1 (24ee9b0) |
 | 01-05 | 5 | 🟡 Partial — CI YAML + base README written, push/deploy deferred | 1 (b841341) |
 
 **Verification still green:**
 - `npm run typecheck` ✓
 - `npm run lint` ✓
-- `npm test` ✓ (1 passed, 2 skipped — db/schema tests skip until real DATABASE_URL)
+- `npm test` ✓ **3 passed** (sanity + db connection + schema integrity — Neon live)
 
 **Deviation noted:**
 - `proxy.ts` used instead of `middleware.ts` per Next 16 deprecation (`node_modules/next/dist/docs/01-app/02-guides/upgrading/version-16.md` line 627). Auth.js v5 default export pattern works unchanged.
@@ -62,8 +68,8 @@ Visibility ✅ resolved (public, user-confirmed 2026-05-06).
 | # | Prerequisite | What user needs to do | Unblocks |
 |---|--------------|----------------------|----------|
 | 1 | Node ≥20 | ✅ Already verified (v24.8.0) | — |
-| 2 | GitHub repo | ✅ Created at https://github.com/zeroyuekun/ai-finance-coach (PUBLIC, pending user confirmation), origin remote set, all 11 commits pushed to main | — |
-| 3 | Neon project | Create Neon project, copy `DATABASE_URL` (postgresql://…?sslmode=require) | Plan 03 db:push, all DB tests |
+| 2 | GitHub repo | ✅ Created at https://github.com/zeroyuekun/finance-tracker-ai (PUBLIC, pending user confirmation), origin remote set, all 11 commits pushed to main | — |
+| 3 | Neon project | ✅ Done 2026-05-06 — created via `neonctl init`, DATABASE_URL applied, db:push succeeded, 3 tests passing | Plan 03 unblocked |
 | 4 | Google OAuth client | Create OAuth client in https://console.cloud.google.com/, add `http://localhost:3000/api/auth/callback/google` to authorized redirects, copy Client ID + Secret | Plan 04 Google sign-in |
 | 5 | Vercel account linked to GitHub | Link account at https://vercel.com/ | Plan 05 deploy |
 | 6 | Resend account | Create account at https://resend.com/, get API key + verified sender (e.g. `onboarding@resend.dev`) | Plan 04 magic-link |
@@ -72,14 +78,12 @@ After completing all 6, fill the real values in `.env.local` (replacing the plac
 
 ---
 
-### Wave 3 — Plan 01-03 finishing steps
+### Wave 3 — Plan 01-03 finishing steps ✅ COMPLETE 2026-05-06
 
-After `.env.local` has real `DATABASE_URL`:
-
-1. **[BLOCKING]** `npm run db:push` — pushes the generated migration to the live Neon DB
-2. `npm test` — db.test.ts and schema.test.ts now run (no longer skipped); expect "3 passed"
-3. Commit any test fixes if drift surfaces
-4. Write `01-03-SUMMARY.md`
+1. ✅ `npm run db:push --force` — applied `drizzle/0000_lively_tenebrous.sql` against live Neon DB. Required `--force` because drizzle.config.ts has `strict: true` (forces TTY confirmation, fails non-interactively).
+2. ✅ `tests/setup.ts` added (vitest setupFile that loads `.env.local` via dotenv) — vitest's default `import "dotenv/config"` only reads `.env`, so the skipIf gate was always firing. Setup file fixed it. `npm test` now shows **3 passed**.
+3. ✅ Committed alongside the rename batch.
+4. ✅ `01-03-SUMMARY.md` updated to status: complete.
 
 ---
 

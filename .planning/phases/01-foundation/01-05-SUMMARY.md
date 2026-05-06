@@ -12,7 +12,7 @@ requires:
 provides:
   - ".github/workflows/ci.yml — Lint · Typecheck · Test · Build pipeline on push to main and on every PR"
   - "README.md — project overview, stack, local-dev commands, scripts list (live demo URL deferred until Vercel deploy)"
-  - "GitHub remote origin → https://github.com/zeroyuekun/ai-finance-coach (public; user confirmed visibility 2026-05-06)"
+  - "GitHub remote origin → https://github.com/zeroyuekun/finance-tracker-ai (public; user confirmed visibility 2026-05-06)"
   - "All 11 phase commits pushed to origin/main (Plans 02 + 03 + 04 + 05 task 1)"
 affects: [02-transactions, 03-categorization, ..., 09-polish (every future phase relies on CI being green to merge)]
 
@@ -53,7 +53,7 @@ completed_partial: 2026-05-06
 
 # Phase 1 Plan 5: GitHub Actions CI + README + GitHub Push Summary
 
-**CI workflow YAML and project README committed; 11 commits pushed to public GitHub repo at zeroyuekun/ai-finance-coach. CI green, GitHub secrets, Vercel deploy, production OAuth callback, and live-demo README line all deferred until user provides external service credentials.**
+**CI workflow YAML and project README committed; 11 commits pushed to public GitHub repo at zeroyuekun/finance-tracker-ai. CI green, GitHub secrets, Vercel deploy, production OAuth callback, and live-demo README line all deferred until user provides external service credentials.**
 
 ## Status: PARTIAL — code + push complete, blocked on user-driven service credentials
 
@@ -97,7 +97,7 @@ completed_partial: 2026-05-06
 - Project status line: "Phase 1 (Foundation) — auth, DB, deployment."
 
 ### GitHub remote + push
-- **Repo:** `zeroyuekun/ai-finance-coach` (created via `gh repo create`)
+- **Repo:** `zeroyuekun/finance-tracker-ai` (created via `gh repo create`)
 - **Visibility:** PUBLIC — user confirmed 2026-05-06 (per ~/.claude/.../memory/feedback_repo_visibility.md, this should have been confirmed BEFORE creation; flagged for future projects)
 - **`git remote -v`** shows `origin` https/push pointing at the repo
 - **`git push -u origin main`** uploaded all 11 commits accumulated across Plans 02 + 03 + 04 + this plan's Task 1
@@ -143,7 +143,7 @@ None for Task 1. CI YAML and README are byte-correct per the plan. The non-trivi
 
 **Resume protocol once user has all credentials in `.env.local`:**
 
-1. User opens `https://github.com/zeroyuekun/ai-finance-coach/settings/secrets/actions`
+1. User opens `https://github.com/zeroyuekun/finance-tracker-ai/settings/secrets/actions`
 2. Adds 6 secrets (one at a time — no batch import) using values from `.env.local`:
    - DATABASE_URL
    - AUTH_SECRET
@@ -170,7 +170,7 @@ None for Task 1. CI YAML and README are byte-correct per the plan. The non-trivi
 
 **Resume protocol once CI green:**
 
-User opens `https://vercel.com/new`, imports `zeroyuekun/ai-finance-coach`. Before clicking Deploy:
+User opens `https://vercel.com/new`, imports `zeroyuekun/finance-tracker-ai`. Before clicking Deploy:
 - Adds 7 env vars (the 6 secrets above + `AUTH_TRUST_HOST=true`) across Production / Preview / Development.
 
 After deploy succeeds:
