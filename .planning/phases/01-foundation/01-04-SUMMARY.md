@@ -1,7 +1,7 @@
 ---
 phase: 01-foundation
 plan: 04
-status: partial-complete
+status: complete
 subsystem: ui+auth-flow
 tags: [next-app-router, react-19, server-actions, shadcn, auth.js, sign-in, dashboard]
 
@@ -47,24 +47,26 @@ patterns-established:
   - "Dashboard page uses redirect('/signin') from next/navigation, NOT Response.redirect — RSC-correct API"
   - "Client components are an exception, not the default — minimize 'use client' surface area"
 
-requirements-completed: []
-requirements-partial: [REQ-auth]   # UI written; live OAuth + magic-link verification deferred to Plan 04 Task 2
+requirements-completed: [REQ-auth]
+requirements-partial: []
 
 # Metrics
-duration: ~10min (autonomous code-ahead)
-completed_partial: 2026-05-06
+duration: ~10min code-ahead + ~10min browser verify
+completed: 2026-05-06
 ---
 
 # Phase 1 Plan 4: Sign-in UI + Protected Dashboard + Sign-out Summary
 
 **End-to-end UI surface for the Phase 1 auth flow: replaced landing page, sign-in page with Google OAuth and Resend magic-link forms, protected dashboard, and sign-out button. Live 6-step browser verification deferred until external service credentials are wired into `.env.local`.**
 
-## Status: PARTIAL — code complete, blocked on Plan 03 live verification + service credentials
+## Status: COMPLETE — all 6 browser verification steps PASS 2026-05-06
 
 | Plan 04 Task | Status | Commit |
 |--------------|--------|--------|
 | Task 1: Build SignOutButton + signin page + dashboard + landing replace | ✅ Done | `24ee9b0` |
-| Task 2: Manual 6-step browser verification (live OAuth + magic-link + middleware + Neon row) | ⏸ DEFERRED — blocked on `npm run db:push`, real `AUTH_GOOGLE_ID/SECRET`, and real `AUTH_RESEND_KEY` | — |
+| Task 2: Manual 6-step browser verification | ✅ Done 2026-05-06 — all 6 PASS, 1 user row in Neon (nevillezeng@gmail.com, "Neville Zeng") | (no commit — manual checkpoint) |
+
+**Lesson captured:** GCP OAuth UI auto-prefixes `localhost:3000` with `https://`, but localhost must be `http://`. First sign-in attempt failed with `Error 400: redirect_uri_mismatch`. User edited both Authorised JavaScript origins and Authorised redirect URIs in GCP Credentials, saved, retried in fresh incognito → success.
 
 ## Performance
 

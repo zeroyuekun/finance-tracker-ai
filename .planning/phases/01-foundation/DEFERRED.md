@@ -1,32 +1,34 @@
 # Phase 1 — Deferred Work
 
-**Status:** Project renamed to "Finance Tracker AI" (display + repo + SPEC). Neon DATABASE_URL applied + 3 tests passing. Awaiting Google OAuth + Resend credentials.
+**Status:** Plan 01-04 complete (live auth flow end-to-end verified). Awaiting GitHub secrets → CI green → Vercel deploy → production verification.
 
-**Last updated:** 2026-05-06 (session 2 — Neon live, project renamed, repo at zeroyuekun/finance-tracker-ai)
+**Last updated:** 2026-05-06 (session 2 — Plan 04 verified, only Plan 05 remains)
 
 ---
 
 ## ⏯ RESUME HERE
 
-Visibility ✅ resolved (public, user-confirmed 2026-05-06).
-Project rename ✅ done — display name "Finance Tracker AI", repo `zeroyuekun/finance-tracker-ai`, SPEC file renamed.
-Task #1 (Neon) ✅ done — DATABASE_URL applied, `db:push` succeeded with `--force`, vitest setup file `tests/setup.ts` loads `.env.local`, `npm test` shows 3 passed.
+Visibility ✅ resolved (public).
+Project rename ✅ done.
+Task #1 (Neon) ✅ done.
+Task #2 (Google OAuth) ✅ done — client `300508208703-p261kcl0q795veqf1p9ikm1dq8mrqnnv.apps.googleusercontent.com` configured with `http://localhost:3000/api/auth/callback/google` redirect URI.
+Task #3 (Resend) ✅ done — API key wired, `onboarding@resend.dev` as sender.
+Task #4 (Local sign-in verify) ✅ done 2026-05-06 — all 6 browser steps PASS, 1 user row in Neon.
 
-**Next entry point:** Task #2 in TodoList — Google OAuth Client ID + Secret.
+**Next entry point:** Task #5 — Add 6 GitHub repository secrets, verify CI green.
 
-1. User creates Google OAuth client at https://console.cloud.google.com → APIs & Services → Credentials → Create Credentials → OAuth Client ID → Web application.
-   - Authorized JavaScript origins: `http://localhost:3000`
-   - Authorized redirect URIs: `http://localhost:3000/api/auth/callback/google`
-   - (Production domain redirect added later in Task #6 after Vercel deploy.)
-2. User pastes Client ID + Client Secret. Claude updates `.env.local` lines `AUTH_GOOGLE_ID=` and `AUTH_GOOGLE_SECRET=`.
+1. User opens https://github.com/zeroyuekun/finance-tracker-ai/settings/secrets/actions → New repository secret. Adds 6 (one at a time, no batch import). Use values from `.env.local`:
+   - `DATABASE_URL`
+   - `AUTH_SECRET`
+   - `AUTH_GOOGLE_ID`
+   - `AUTH_GOOGLE_SECRET`
+   - `AUTH_RESEND_KEY`
+   - `AUTH_EMAIL_FROM`
+   Do NOT add `AUTH_TRUST_HOST` — it's plain text in the workflow YAML.
+2. Reply "secrets added". Claude triggers a fresh CI run via empty commit + push, then polls `gh run list` until green.
 
-Then Task #3 — Resend API key:
-1. User creates account at https://resend.com → API Keys → Create API Key (permission: "Sending access").
-2. User pastes API key (starts with `re_`). Claude updates `.env.local` line `AUTH_RESEND_KEY=`. `AUTH_EMAIL_FROM=onboarding@resend.dev` already set (Resend's default sender, no domain verification needed for v1).
-
-Then Task #4 — Local 6-step browser sign-in verification.
-
-Then Tasks #5–#7 (GitHub secrets + CI green → Vercel deploy → production verify + README live demo).
+Then Task #6 — Vercel deploy + production OAuth callback.
+Then Task #7 — Production verify + README live demo + 01-05 SUMMARY.
 
 **Open task list (TaskList tool, ID order):**
 1. Neon: get DATABASE_URL and run db:push
@@ -47,7 +49,7 @@ Then Tasks #5–#7 (GitHub secrets + CI green → Vercel deploy → production v
 |------|------|--------|---------|
 | 01-02 | 2 | ✅ Complete | 4 (a7912e6, 8901c22, d8ae1a3, f99d617) |
 | 01-03 | 3 | ✅ Complete — code + db:push + 3 tests passing | 2 (8fb8851, b9321f5) + setup file commit |
-| 01-04 | 4 | 🟡 Partial — UI written, manual browser verify deferred | 1 (24ee9b0) |
+| 01-04 | 4 | ✅ Complete — UI + 6-step browser verify all PASS, 1 user row in Neon | 1 (24ee9b0) |
 | 01-05 | 5 | 🟡 Partial — CI YAML + base README written, push/deploy deferred | 1 (b841341) |
 
 **Verification still green:**

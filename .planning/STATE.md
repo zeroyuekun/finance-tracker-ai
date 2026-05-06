@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: paused-on-prereqs
-stopped_at: Project renamed "Finance Tracker AI" (display + repo zeroyuekun/finance-tracker-ai + SPEC). Plan 01-03 fully complete (Neon DATABASE_URL applied, db:push succeeded, 3 tests passing). Awaiting Google OAuth + Resend credentials. See DEFERRED.md "RESUME HERE".
-last_updated: "2026-05-06T14:20:00.000Z"
-last_activity: 2026-05-06 -- project rename + Neon db:push + tests/setup.ts (vitest .env.local loader) + 3 tests passing
+stopped_at: Plan 01-04 complete (Google OAuth + Resend magic-link + sign-out + middleware redirect all verified, 1 user row in Neon). Awaiting GitHub secrets → CI green → Vercel deploy. See DEFERRED.md.
+last_updated: "2026-05-06T11:40:00.000Z"
+last_activity: 2026-05-06 -- Plan 04 6-step browser verify all PASS; redirect_uri_mismatch resolved by switching GCP URIs from https → http
 progress:
   total_phases: 9
   completed_phases: 0
   total_plans: 5
-  completed_plans: 2
-  percent: 22
+  completed_plans: 3
+  percent: 33
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 
 ## Current Position
 
-Phase: 1 (Foundation) — PAUSED ON PREREQS
-Plan: 2 fully complete (02 + 03), 2 partially shipped (04/05) pending Google OAuth + Resend.
-Status: Paused on Google OAuth + Resend setup
-Last activity: 2026-05-06 -- project renamed to "Finance Tracker AI" (display + repo + SPEC); Neon DATABASE_URL applied; 3 tests passing; vitest .env.local loader added
+Phase: 1 (Foundation) — PAUSED ON GITHUB SECRETS
+Plan: 3 fully complete (02 + 03 + 04), Plan 05 partially shipped (CI YAML committed; secrets/Vercel deferred).
+Status: Paused on user adding 6 GitHub repository secrets
+Last activity: 2026-05-06 -- Plan 04 verified end-to-end (Google OAuth + Resend magic-link + middleware + Neon user row)
 
-Progress: [████░░░░░░] ~22% (2 of 5 plans done; 2 plans ~70% done pending API)
+Progress: [██████░░░░] ~33% (3 of 5 plans done; Plan 05 secrets/deploy remain)
 
 **See:** `.planning/phases/01-foundation/DEFERRED.md` for the resume punch list.
 
