@@ -125,7 +125,14 @@ None for Task 1. CI YAML and README are byte-correct per the plan. The non-trivi
 
 ## Issues Encountered
 
-- **First CI run after push will FAIL at Build step.** The push from Task 1 step 5 triggered a CI run, but no GitHub secrets exist yet — `npm run build` will hit the missing `AUTH_*` env vars and exit non-zero. This is expected and documented in Task 3 (which will trigger a fresh run via empty commit AFTER Task 2 sets the secrets).
+- **CI runs after push FAIL at Build step.** Confirmed via `gh run list`: 3 runs to date (`727e35b`, `7ad1ee8`, `ca0217e`), all conclusion=failure. The exact error each time is the same:
+  ```
+  Failed to collect configuration for /dashboard
+  [cause]: Error: DATABASE_URL is not set
+      at module evaluation (.next/server/chunks/ssr/...)
+  ```
+  Mechanism: `${{ secrets.DATABASE_URL }}` resolves to empty string when the secret is unset → `lib/db/index.ts` line 6's `if (!databaseUrl) throw` fires during Next 16's "Collecting page data" phase (it imports every route module, including `/dashboard` which imports `@/lib/db` via `auth()`). Will go green automatically once Task 2 sets the secrets.
+- **Local build passes with placeholder env.** `npm run build` exits 0 locally because `.env.local` carries placeholder strings (`postgresql://placeholder:placeholder@...`) that are truthy — the throw doesn't fire. Output confirms 6 routes built, including `ƒ Proxy (Middleware)` (validates the proxy.ts deviation) and `/signin` static-prerendered. This means TypeScript + ESLint + Next compile + page collection are all clean; the only delta to CI green is real secret values.
 - **Pre-existing OAuth callback** in Google Cloud Console only covers `http://localhost:3000/api/auth/callback/google`. The production callback (`https://<vercel-domain>/api/auth/callback/google`) must be added in Task 4 step 12 — user-driven browser action.
 
 ## Open Issues / Deferred Work
