@@ -1,26 +1,35 @@
 # Phase 1 — Deferred Work
 
-**Status:** All autonomous code-ahead complete. GitHub repo created and pushed. Awaiting user decision on repo visibility, then Neon DATABASE_URL.
+**Status:** All autonomous code-ahead complete. SUMMARY.md docs written for Plans 03/04/05. GitHub repo public (user-confirmed 2026-05-06). Awaiting Neon DATABASE_URL.
 
-**Last updated:** 2026-05-06 (session ended for the night)
+**Last updated:** 2026-05-06 (session 2 — visibility resolved, SUMMARY docs landed)
 
 ---
 
 ## ⏯ RESUME HERE
 
-When the user returns and says "resume":
+Visibility ✅ resolved (public, user-confirmed 2026-05-06).
 
-1. **First:** ask whether https://github.com/zeroyuekun/ai-finance-coach should stay **public** or flip to **private**.
-   - If private: `gh repo edit zeroyuekun/ai-finance-coach --visibility private --accept-visibility-change-consequences`
-   - Note: I created it public without explicit confirmation — this was flagged as a feedback issue (see `~/.claude/.../memory/feedback_repo_visibility.md`). Don't make the same mistake on future repos.
+**Next entry point:** Task #1 in TodoList — Neon DATABASE_URL.
 
-2. **Then:** start Task #20 — walk user through Neon project creation (https://console.neon.tech), get DATABASE_URL, paste into `.env.local`, run `npm run db:push`, verify `npm test` shows 3 passed.
+1. User creates Neon project at https://console.neon.tech (Sydney region recommended, free Hobby tier, project name `ai-finance-coach`).
+2. User pastes pooled connection string. Claude:
+   - Edits `.env.local` line 6 — replace placeholder `DATABASE_URL=` with the real one.
+   - Runs `npm run db:push` — applies `drizzle/0000_lively_tenebrous.sql` against the live DB.
+   - Runs `npm test` — expect **3 passed** (skipIf gates auto-trigger when host matches `neon.tech`).
+   - Commits any drift: `git commit -am "test(01-03): activate live-DB tests after db:push"` (only if test files changed).
+   - Marks Task #1 done in TodoList; updates `01-03-SUMMARY.md` status from `partial-complete` → `complete`.
 
-3. **Then:** Tasks #21–#26 in order. Most are interactive (user does browser steps, I do CLI work between).
+3. Then Tasks #2–#7 in order (Google OAuth → Resend → local sign-in verify → GitHub secrets + CI green → Vercel import + production OAuth → production verify + README live demo).
 
-**Open task list (TaskList tool):** #20 Neon → #21 Google OAuth → #22 Resend → #23 Local sign-in verify → #24 GitHub secrets + CI green → #25 Vercel import + production OAuth → #26 Production verify + README live demo
-
-**Do NOT start until user confirms repo visibility.**
+**Open task list (TaskList tool, ID order):**
+1. Neon: get DATABASE_URL and run db:push
+2. Google OAuth: Client ID + Secret
+3. Resend: API key + verified sender
+4. Local sign-in verification (6 steps)
+5. GitHub secrets + CI green
+6. Vercel deploy + production OAuth callback
+7. Production verify + README live demo + 01-05 SUMMARY
 
 
 
