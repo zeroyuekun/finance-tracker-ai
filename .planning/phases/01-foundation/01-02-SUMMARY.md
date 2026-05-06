@@ -152,7 +152,7 @@ _No final metadata commit by this executor — STATE.md and ROADMAP.md updates a
 **1. [Rule 3 - Blocking] `create-next-app` refused to scaffold over `.planning/`**
 - **Found during:** Task 1, step 3 (`npx create-next-app@latest .`)
 - **Issue:** The Next.js 16 CLI refuses to scaffold into a directory containing `.planning/` (the GSD planning artifacts). The plan's note "When create-next-app prompts about non-empty directory, answer YES" assumed an interactive prompt — Next 16's CLI hard-fails non-interactively instead.
-- **Fix:** Moved `ai-finance-coach/.planning` and `ai-finance-coach/docs` to a sibling temp directory, ran `create-next-app`, then moved them back. Net effect identical to the plan's intent (scaffold preserves planning + docs); only the mechanism differs.
+- **Fix:** Moved `finance-tracker-ai/.planning` and `finance-tracker-ai/docs` to a sibling temp directory, ran `create-next-app`, then moved them back. Net effect identical to the plan's intent (scaffold preserves planning + docs); only the mechanism differs.
 - **Files modified:** None permanent (temp move/restore only)
 - **Verification:** Post-scaffold `ls -la` confirms `.planning/` and `docs/` are intact alongside the new Next.js scaffold.
 - **Committed in:** `a7912e6` (Task 1 commit)

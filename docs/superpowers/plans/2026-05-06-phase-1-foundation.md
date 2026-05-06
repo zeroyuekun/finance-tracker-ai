@@ -64,7 +64,7 @@
 These are **not coding tasks** — they are external account setups. Complete before Task 1.
 
 - [ ] **P1: Node.js 20+ installed.** Verify with `node --version` (expect `v20.x` or `v22.x`).
-- [ ] **P2: GitHub account with a new empty repo.** Repo name suggestion: `ai-finance-coach`. Don't initialize with README — local already has one. Note the repo URL.
+- [ ] **P2: GitHub account with a new empty repo.** Repo name suggestion: `finance-tracker-ai`. Don't initialize with README — local already has one. Note the repo URL.
 - [ ] **P3: Neon account + project.** Sign up at https://neon.tech (free tier). Create a project. Copy the connection string from the dashboard — it looks like `postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/neondb?sslmode=require`.
 - [ ] **P4: Google OAuth credentials.** Go to https://console.cloud.google.com → APIs & Services → Credentials → Create OAuth 2.0 Client ID → Web application. Authorized redirect URIs: `http://localhost:3000/api/auth/callback/google` (will add Vercel URL later). Copy Client ID and Client Secret.
 - [ ] **P5: Vercel account, GitHub linked.** Sign up at https://vercel.com — link your GitHub account so Vercel can auto-deploy.
@@ -99,11 +99,11 @@ Expected: `v20.x.x` or `v22.x.x`. If older, install Node 20 LTS from https://nod
 - [ ] **Step 2: Confirm working directory**
 
 ```bash
-cd "C:\Users\Admin\projects\ai-finance-coach"
+cd "C:\Users\Admin\projects\finance-tracker-ai"
 pwd
 ```
 
-Expected: `C:\Users\Admin\projects\ai-finance-coach` (or its forward-slash equivalent).
+Expected: `C:\Users\Admin\projects\finance-tracker-ai` (or its forward-slash equivalent).
 
 - [ ] **Step 3: Run create-next-app**
 
@@ -1038,7 +1038,7 @@ git remote -v
 If empty, add it (replace URL with your repo from Prerequisite P2):
 
 ```bash
-git remote add origin https://github.com/<your-username>/ai-finance-coach.git
+git remote add origin https://github.com/<your-username>/finance-tracker-ai.git
 ```
 
 - [ ] **Step 4: Commit and push**
@@ -1100,7 +1100,7 @@ Before deploying, add the same env vars as Task 8 Step 5:
 
 - [ ] **Step 3: Click "Deploy"**
 
-Wait ~1-2 minutes for build. Expected: green check + production URL like `https://ai-finance-coach-xxx.vercel.app`.
+Wait ~1-2 minutes for build. Expected: green check + production URL like `https://finance-tracker-ai-xxx.vercel.app`.
 
 - [ ] **Step 4: Add the production URL to Google OAuth allowed redirects**
 

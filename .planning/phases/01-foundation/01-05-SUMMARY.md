@@ -174,7 +174,7 @@ User opens `https://vercel.com/new`, imports `zeroyuekun/finance-tracker-ai`. Be
 - Adds 7 env vars (the 6 secrets above + `AUTH_TRUST_HOST=true`) across Production / Preview / Development.
 
 After deploy succeeds:
-- Captures production URL (typically `https://ai-finance-coach.vercel.app` or similar)
+- Captures production URL (typically `https://finance-tracker-ai.vercel.app` or similar)
 - Adds `https://<production-domain>/api/auth/callback/google` to Google OAuth Authorized redirect URIs
 
 ### [BLOCKING] Task 5: 7-step end-to-end production verification

@@ -165,7 +165,7 @@
 - **Source:** docs/superpowers/plans/2026-05-06-phase-1-foundation.md (Prerequisites section)
 - **Notes:** Six manual prerequisites before Task 1:
   - P1: Node.js 20+ installed
-  - P2: GitHub account with empty repo (suggested name `ai-finance-coach`)
+  - P2: GitHub account with empty repo (suggested name `finance-tracker-ai`)
   - P3: Neon account + project; copy `DATABASE_URL`
   - P4: Google OAuth client ID + secret; redirect URI `http://localhost:3000/api/auth/callback/google` (Vercel URL added later)
   - P5: Vercel account with GitHub linked
