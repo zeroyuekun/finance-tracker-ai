@@ -6,7 +6,7 @@
 
 ## Topic: Problem statement and motivation
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §1
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §1
 - **Notes:**
   - Author pivoted from a finance degree into software engineering. During a tight financial stretch tried Cleo, Monarch, Rocket Money — found them generic ("you spent too much on coffee") with no understanding of personal context.
   - Motivation: build a financial advisor you can actually talk to — one that knows goals, fixed obligations, non-negotiables, and savings targets.
@@ -14,7 +14,7 @@
 
 ## Topic: Market gap (validated by 2026 research)
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §1 (table)
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §1 (table)
 - **Notes:**
   - Behavioral AI (Copilot Money, Monarch): strong categorization, shallow advice
   - Conversational AI (Cleo, Origin): chat-based UX, "vibes-grade" math, no framework grounding
@@ -24,7 +24,7 @@
 
 ## Topic: Goals (project-level)
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §2
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §2
 - **Notes:**
   - Land a SWE job in 2026 by demonstrating full-stack + AI engineering + domain expertise
   - Solve a real personal problem authentically
@@ -34,14 +34,14 @@
 
 ## Topic: Users
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §4
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §4
 - **Notes:**
   - **Primary:** People with some financial literacy who want a smart, conversational advisor that respects their context. Built first for the author's own use during job search.
   - **Secondary:** Anyone wanting better financial guidance than generic "cut your coffee" advice. Beginners welcome — the AI adapts.
 
 ## Topic: UI surface map
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §6.3
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §6.3
 - **Notes:** 9 screens
   1. Landing → signup
   2. Onboarding flow (10 chat-style questions)
@@ -55,7 +55,7 @@
 
 ## Topic: Onboarding question detail
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §8
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §8
 - **Notes:** Conversational, one question per screen, progress bar visible.
   1. Age band — 18–25 / 26–35 / 36–45 / 46–55 / 56–65 / 65+
   2. Income stability — W-2 stable / variable hours / 1099 freelance / student / between jobs
@@ -71,7 +71,7 @@
 
 ## Topic: Promptfoo eval scenarios (the 7 baseline scenarios)
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §9.2
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §9.2
 - **Notes:**
   1. 0.5-month EF + stable income → AI flags shortfall, suggests tier laddering
   2. Debts at 6% / 18% / 22% → AI calls `simulate_debt_payoff(avalanche)`
@@ -84,7 +84,7 @@
 
 ## Topic: 10-week implementation roadmap
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §13
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §13
 - **Notes:**
   - **Weeks 1–2:** Foundation (Phase 1) — Next.js + TS + Tailwind/shadcn scaffold; Neon DB + Drizzle schema; Auth.js + Google OAuth; Vercel deploy + CI; one screen end-to-end. **Implementation plan exists** in docs/superpowers/plans/2026-05-06-phase-1-foundation.md.
   - **Week 3:** Transactions — manual CRUD + CSV import (parse → map → preview → save) + default categories.
@@ -99,7 +99,7 @@
 
 ## Topic: Risks and mitigations
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §14
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §14
 - **Notes:**
   - LLM provider deprecation/pricing change → Vercel AI SDK is provider-agnostic; swap in one line.
   - Free tier overage → portfolio scale (<100 users) is well within limits.
@@ -111,7 +111,7 @@
 
 ## Topic: Backlog (post-MVP)
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §15
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §15
 - **Notes:**
   - Plaid (US) / TrueLayer (UK) / Tink (EU) bank sync
   - Voice interface (OpenAI Realtime / Claude Voice Mode)
@@ -128,7 +128,7 @@
 
 ## Topic: Open questions
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §16
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §16
 - **Notes:**
   - Project name — working title is "Finance Tracker AI"; may rename before launch
   - Custom domain — buy a $12/yr domain or stay on `.vercel.app`?
@@ -137,7 +137,7 @@
 
 ## Topic: Success criteria
 
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §17
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §17
 - **Notes:**
   - Live, public URL with working signup → onboarding → dashboard → AI chat
   - Vitest + Promptfoo eval suite green in CI on every PR

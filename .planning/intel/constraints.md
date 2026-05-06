@@ -7,7 +7,7 @@
 ## C-tech-stack (technology choices)
 
 - **Type:** nfr / technology
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §11
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §11
 - **Constraint:**
   - Framework: Next.js 16 (App Router) + TypeScript
   - Database: Neon Postgres + Drizzle ORM
@@ -41,7 +41,7 @@
 ## C-cost-budget (operational cost ceiling)
 
 - **Type:** nfr
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §2, §11
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §2, §11
 - **Constraint:** Total operational cost must remain at $0/month at portfolio scale (<100 users) for the MVP.
 - **Implications:** No paid services; rely on free tiers (Vercel Hobby, Neon free, Gemini free tier 250 req/day, Sentry free 5k events/mo, GitHub Actions free for public repos, Resend free tier). Custom domain ($12/yr) is optional and out of v1 budget.
 - **Risk note:** Vercel Hobby plan bans commercial use; portfolio is non-commercial, but if monetizing later, migrate to Cloudflare Pages.
@@ -49,14 +49,14 @@
 ## C-ship-budget (time and effort budget)
 
 - **Type:** nfr / schedule
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §1 (header), §13
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §1 (header), §13
 - **Constraint:** Ship MVP in ~10 weeks at ~10–12 hrs/week. Buffer weeks 11–12 absorb spillover.
 - **Phase 1 sub-budget:** ~20–24 hours over weeks 1–2 (DOC).
 
 ## C-data-model (Postgres schema constraint)
 
 - **Type:** schema
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §6.2
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §6.2
 - **Constraint:** The data model must include the following tables (full MVP set):
   - `users` — id, email, oauth_provider, created_at
   - `profiles` — user_id, age_band, income_band, income_stability, ef_band, debts (JSON), dependents, goals (JSON), top_goal_horizon, risk_score, non_negotiables (JSON)
@@ -75,7 +75,7 @@
 ## C-ai-advisor-prompt (5-layer system prompt structure)
 
 - **Type:** protocol / api-contract
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §7.1
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §7.1
 - **Constraint:** The AI advisor system prompt must be composed dynamically per request from 5 layers in fixed order:
   1. ROLE — "personal finance advisor grounded in CFP frameworks"
   2. HARD CONSTRAINTS — show math; no stock/fund picks; escalate tax/legal to real CFP; ask clarifying questions before consequential claims; never recommend cutting non-negotiables
@@ -86,7 +86,7 @@
 ## C-finance-tools (deterministic tool function contracts)
 
 - **Type:** api-contract
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §7.2
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §7.2
 - **Constraint:** Six TypeScript tool functions, deterministic, math-in-TS-not-in-LLM:
   - `calculate_savings_rate(income, expenses, period) → rate (0..1)`
   - `check_emergency_fund_tier(liquid_savings, monthly_expenses) → { tier: none|starter|full|over, months_covered }`
@@ -99,7 +99,7 @@
 ## C-eval-strategy (two-layer eval contract)
 
 - **Type:** protocol
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §9
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §9
 - **Constraint:**
   - **Layer 1 (Vitest):** Pure-TS unit tests on the 6 finance tool functions. Zero LLM involvement. Runs on every PR.
   - **Layer 2 (Promptfoo):** Scenario-based LLM behavior tests covering at least the 7 scenarios in SPEC §9.2 table. Sampled scenarios run on every PR via GitHub Actions; full suite runs on a slower cadence (nightly/on-demand).
@@ -107,7 +107,7 @@
 ## C-non-goals (explicit v1 exclusions)
 
 - **Type:** scope / nfr
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §3
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §3
 - **Constraint:** The following are explicitly excluded from v1 and must not be implemented in the 10-week MVP:
   - Plaid bank sync
   - Native mobile app (responsive web only)
@@ -122,7 +122,7 @@
 ## C-deployment-pipeline (CI/CD contract)
 
 - **Type:** protocol
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §12; docs/superpowers/plans/2026-05-06-phase-1-foundation.md Task 8
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §12; docs/superpowers/plans/2026-05-06-phase-1-foundation.md Task 8
 - **Constraint:**
   - On PR: GitHub Actions runs lint + type-check + Vitest + Promptfoo (sampled) + build check
   - On merge to `main`: Vercel auto-deploys
@@ -133,7 +133,7 @@
 ## C-observability (AI ops + error tracking)
 
 - **Type:** nfr
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §6.3 (`/admin/ai-stats`), §11, §12
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §6.3 (`/admin/ai-stats`), §11, §12
 - **Constraint:**
   - Sentry free tier for app errors
   - Custom `ai_calls` table records per-request: model, prompt_hash, input_tokens, output_tokens, latency_ms, tool_calls_count, status
@@ -143,7 +143,7 @@
 ## C-privacy (data isolation + deletion)
 
 - **Type:** nfr / security
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §14
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §14
 - **Constraint:**
   - Auth + secure cookies + CSRF protection on all authenticated routes
   - All user data isolated per `user_id` foreign key

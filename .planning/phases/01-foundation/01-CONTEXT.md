@@ -94,7 +94,7 @@ Stand up a deployable Next.js 16 + TypeScript application with Postgres-backed a
 **Downstream agents MUST read these before planning or implementing.**
 
 ### Source-of-truth artifacts (the "questions are answered" docs)
-- `docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md` — Full design spec; §5 Functional Requirements, §6 Architecture, §11 Tech Stack, §12 Deployment & Ops, §13 Roadmap weeks 1–2 are the binding sections for Phase 1
+- `docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md` — Full design spec; §5 Functional Requirements, §6 Architecture, §11 Tech Stack, §12 Deployment & Ops, §13 Roadmap weeks 1–2 are the binding sections for Phase 1
 - `docs/superpowers/plans/2026-05-06-phase-1-foundation.md` — **Existing 1196-line implementation plan with 9 tasks and 73 bite-sized TDD steps.** Adapt this into GSD's PLAN.md/CONTEXT.md format; do NOT discard it. Each GSD task should map to a task or task-group from this plan with traceability comments.
 
 ### GSD planning files

@@ -12,7 +12,7 @@
 | Type | Count | Sources |
 |---|---|---|
 | ADR | 0 | — |
-| SPEC | 1 | docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md |
+| SPEC | 1 | docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md |
 | PRD | 0 | — |
 | DOC | 1 | docs/superpowers/plans/2026-05-06-phase-1-foundation.md |
 | **Total** | **2** | |
@@ -99,7 +99,7 @@ The 4 INFO entries reflect benign overlap where the DOC adds implementation deta
   - `.planning/intel/context.md`
 - **Conflicts report:** `.planning/INGEST-CONFLICTS.md`
 - **Classifications consumed:**
-  - `.planning/intel/classifications/2026-05-06-ai-finance-coach-design-7a8f3b2c.json`
+  - `.planning/intel/classifications/2026-05-06-finance-tracker-ai-design-7a8f3b2c.json`
   - `.planning/intel/classifications/2026-05-06-phase-1-foundation-9b3a8d2c.json`
 
 ## Status

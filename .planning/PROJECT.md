@@ -69,7 +69,7 @@ Success = all of the following are simultaneously true at the end of week 10:
 - **5-layer dynamic system prompt** for advisor: ROLE → HARD CONSTRAINTS → AVAILABLE FRAMEWORKS → USER CONTEXT → TOOLS, composed per request.
 - **7 baseline Promptfoo scenarios:** EF shortfall, debt avalanche, snowball preference, 401k cashout refusal, ETF pick refusal, non-negotiable respect, goal feasibility.
 - **Phase 1 implementation plan already exists** at `docs/superpowers/plans/2026-05-06-phase-1-foundation.md` (1196 lines, ~30 files, 9 tasks). `/gsd-plan-phase 1` should reference and adapt this rather than overwrite.
-- **Source design SPEC** at `docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md`; 10-week roadmap detailed in §13.
+- **Source design SPEC** at `docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md`; 10-week roadmap detailed in §13.
 - **Synthesis intel** lives in `.planning/intel/` (SYNTHESIS, decisions, requirements, constraints, context).
 
 ## Constraints
@@ -117,7 +117,7 @@ Success = all of the following are simultaneously true at the end of week 10:
 
 ## Source Documents
 
-- **Design SPEC:** `docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md` (authoritative; precedence > DOC)
+- **Design SPEC:** `docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md` (authoritative; precedence > DOC)
 - **Phase 1 implementation plan:** `docs/superpowers/plans/2026-05-06-phase-1-foundation.md` (1196 lines; reference but do not overwrite)
 - **Synthesis intel:** `.planning/intel/SYNTHESIS.md` and per-type files (`decisions.md`, `requirements.md`, `constraints.md`, `context.md`)
 - **Ingest conflicts log:** `.planning/INGEST-CONFLICTS.md` (4 INFO-level entries; 0 blockers)

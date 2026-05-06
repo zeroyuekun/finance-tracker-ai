@@ -11,7 +11,7 @@
 ## REQ-auth
 
 - **Title:** Authentication (email + Google OAuth)
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.1
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.1
 - **Description:** Users sign up and sign in via email magic-link or Google OAuth, managed by Auth.js v5 with database-backed sessions.
 - **Acceptance criteria:**
   - Sign-in supports email magic-link and Google OAuth
@@ -26,7 +26,7 @@
 ## REQ-transactions
 
 - **Title:** Transactions CRUD + CSV import
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.2
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.2
 - **Description:** Users manually create, read, update, delete transactions, and bulk-import via CSV with a parse → column-map → preview → confirm flow.
 - **Acceptance criteria:**
   - Manual transaction CRUD with account, amount, date, description, category
@@ -40,7 +40,7 @@
 ## REQ-categorization
 
 - **Title:** Categorization engine (rules + AI fallback + manual override)
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.3
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.3
 - **Description:** Two-stage categorization: regex/keyword rule engine first, AI fallback (Gemini Flash) for misses, with manual overrides that create new rules.
 - **Acceptance criteria:**
   - Rule engine matches transactions to categories by pattern + priority
@@ -54,7 +54,7 @@
 ## REQ-onboarding
 
 - **Title:** 10-question CFP onboarding intake
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.4, §8
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.4, §8
 - **Description:** Conversational, one-question-per-screen onboarding flow capturing CFP-grade financial context that drives downstream AI advice behavior.
 - **Acceptance criteria:**
   - 10 questions in order: age band, income stability, monthly take-home, emergency fund, debts, dependents, top 1–3 goals, top-goal horizon, risk reaction, non-negotiable spending
@@ -68,7 +68,7 @@
 ## REQ-goals-dashboard
 
 - **Title:** Goals + Dashboard
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.5, §10.2
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.5, §10.2
 - **Description:** Goals CRUD plus a dashboard showing KPI tiles (savings rate, EF tier, top-goal %, this-month spend), spend-by-category chart, AI insight card, and recent transactions.
 - **Acceptance criteria:**
   - Goals CRUD persists to `goals` table
@@ -81,7 +81,7 @@
 ## REQ-ai-advisor
 
 - **Title:** AI advisor chat (streaming, tool-calling, framework-grounded)
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.6, §7, §10.3
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.6, §7, §10.3
 - **Description:** Full-screen conversational advisor with token-by-token streaming, deterministic finance tool calls visible inline, citation chips linking to user data, suggested prompts at empty state, and persistent conversation history.
 - **Acceptance criteria:**
   - 5-layer system prompt composed per-request (role, hard constraints, frameworks, user context, tools)
@@ -99,7 +99,7 @@
 ## REQ-eval-suite
 
 - **Title:** Eval suite (Vitest tools + Promptfoo LLM behavior)
-- **Source:** docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md §5.7, §9
+- **Source:** docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md §5.7, §9
 - **Description:** Two-layer evaluation: Vitest unit tests on deterministic finance tools (Layer 1), Promptfoo scenarios on LLM behavior (Layer 2), both running in CI on every PR.
 - **Acceptance criteria:**
   - Vitest covers all 6 finance tools with deterministic assertions

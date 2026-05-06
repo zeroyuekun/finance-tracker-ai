@@ -3,7 +3,7 @@
 **Defined:** 2026-05-06
 **Core Value:** A user can complete a 10-question CFP onboarding and have a tailored, framework-grounded conversation with an AI advisor whose math runs in deterministic TypeScript tools — and a recruiter can see the eval suite proving the advice is correct.
 
-> **Source of truth:** These 7 requirements are extracted from the design SPEC (§5) at `docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md` and mirrored from `.planning/intel/requirements.md`. SPEC remains authoritative; this file is the consumer-facing roadmap-traceable view.
+> **Source of truth:** These 7 requirements are extracted from the design SPEC (§5) at `docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md` and mirrored from `.planning/intel/requirements.md`. SPEC remains authoritative; this file is the consumer-facing roadmap-traceable view.
 
 ## v1 Requirements
 

@@ -5,7 +5,7 @@
 A 9-phase journey from empty repo to a live `*.vercel.app` URL where a real user signs up, completes a 10-question CFP onboarding, lands on a dashboard with their data, and has a tailored streaming conversation with the AI advisor — all backed by Vitest + Promptfoo evals green in CI on every PR. Phases map 1:1 to weeks 1–10 of the design SPEC §13 implementation plan, with Phase 1 covering the foundation across weeks 1–2.
 
 **Source documents:**
-- Design SPEC: `docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md` (authoritative; precedence > DOC)
+- Design SPEC: `docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md` (authoritative; precedence > DOC)
 - Phase 1 implementation plan: `docs/superpowers/plans/2026-05-06-phase-1-foundation.md` (1196 lines, ~30 files, 9 tasks; reference but do not overwrite)
 - Synthesis intel: `.planning/intel/SYNTHESIS.md` (+ per-type files)
 
@@ -193,4 +193,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 ---
 *Roadmap defined: 2026-05-06 from new-project-from-ingest synthesis*
-*Source SPEC: `docs/superpowers/specs/2026-05-06-ai-finance-coach-design.md` §13*
+*Source SPEC: `docs/superpowers/specs/2026-05-06-finance-tracker-ai-design.md` §13*
