@@ -1,8 +1,8 @@
 # Phase 1 — Deferred Work
 
-**Status:** Plan 01-04 complete (live auth flow end-to-end verified). Awaiting GitHub secrets → CI green → Vercel deploy → production verification.
+**Status:** Plan 01-04 complete (live auth flow end-to-end verified). Plan 01-05 Tasks 1–3 complete (CI green on `main`). Awaiting Vercel deploy → production verification → README live demo.
 
-**Last updated:** 2026-05-06 (session 2 — Plan 04 verified, only Plan 05 remains)
+**Last updated:** 2026-05-06 (session 3 — secrets + CI green confirmed; only Vercel deploy + prod verify remain)
 
 ---
 
@@ -14,30 +14,36 @@ Task #1 (Neon) ✅ done.
 Task #2 (Google OAuth) ✅ done — client `300508208703-p261kcl0q795veqf1p9ikm1dq8mrqnnv.apps.googleusercontent.com` configured with `http://localhost:3000/api/auth/callback/google` redirect URI.
 Task #3 (Resend) ✅ done — API key wired, `onboarding@resend.dev` as sender.
 Task #4 (Local sign-in verify) ✅ done 2026-05-06 — all 6 browser steps PASS, 1 user row in Neon.
+Task #5 (GitHub secrets + CI green) ✅ done 2026-05-06 — 6 secrets present (`gh secret list` confirms `DATABASE_URL`, `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_RESEND_KEY`, `AUTH_EMAIL_FROM` set 2026-05-06T11:42Z); latest CI run for `b276232` (feat(01-04): live sign-in flow verified end-to-end) = ✅ success in 56s at 12:36Z.
 
-**Next entry point:** Task #5 — Add 6 GitHub repository secrets, verify CI green.
+**Next entry point:** Task #6 — Vercel deploy + 7 env vars + production OAuth callback.
 
-1. User opens https://github.com/zeroyuekun/finance-tracker-ai/settings/secrets/actions → New repository secret. Adds 6 (one at a time, no batch import). Use values from `.env.local`:
-   - `DATABASE_URL`
-   - `AUTH_SECRET`
-   - `AUTH_GOOGLE_ID`
-   - `AUTH_GOOGLE_SECRET`
-   - `AUTH_RESEND_KEY`
-   - `AUTH_EMAIL_FROM`
-   Do NOT add `AUTH_TRUST_HOST` — it's plain text in the workflow YAML.
-2. Reply "secrets added". Claude triggers a fresh CI run via empty commit + push, then polls `gh run list` until green.
+Two viable paths (decision pending):
 
-Then Task #6 — Vercel deploy + production OAuth callback.
-Then Task #7 — Production verify + README live demo + 01-05 SUMMARY.
+**Path A — Vercel UI (original plan):**
+1. User opens https://vercel.com/new and imports `zeroyuekun/finance-tracker-ai`.
+2. Before clicking Deploy, in env vars panel adds all 7 vars (Production / Preview / Development):
+   - `DATABASE_URL`, `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`, `AUTH_RESEND_KEY`, `AUTH_EMAIL_FROM` from `.env.local`
+   - `AUTH_TRUST_HOST=true` (plain value)
+3. Click Deploy. Capture production URL. Reply with URL.
+4. Add `https://<prod-domain>/api/auth/callback/google` to Google OAuth Authorized redirect URIs.
+
+**Path B — Vercel CLI (faster, but each step requires explicit user authorization):**
+1. `vercel link` (associates this directory with a new Vercel project).
+2. `vercel env add <KEY> <ENV>` × 7 vars × 3 envs (or paste values via stdin).
+3. `vercel --prod` to deploy.
+4. User adds Google OAuth production callback in GCP (still browser-driven).
+
+After deploy, proceed to Task #7 — Production verify + README live demo + 01-05 SUMMARY.
 
 **Open task list (TaskList tool, ID order):**
-1. Neon: get DATABASE_URL and run db:push
-2. Google OAuth: Client ID + Secret
-3. Resend: API key + verified sender
-4. Local sign-in verification (6 steps)
-5. GitHub secrets + CI green
-6. Vercel deploy + production OAuth callback
-7. Production verify + README live demo + 01-05 SUMMARY
+1. Neon: get DATABASE_URL and run db:push ✅
+2. Google OAuth: Client ID + Secret ✅
+3. Resend: API key + verified sender ✅
+4. Local sign-in verification (6 steps) ✅
+5. GitHub secrets + CI green ✅
+6. Vercel deploy + production OAuth callback ⏳ NEXT
+7. Production verify + README live demo + 01-05 SUMMARY ⏳
 
 
 
@@ -50,7 +56,7 @@ Then Task #7 — Production verify + README live demo + 01-05 SUMMARY.
 | 01-02 | 2 | ✅ Complete | 4 (a7912e6, 8901c22, d8ae1a3, f99d617) |
 | 01-03 | 3 | ✅ Complete — code + db:push + 3 tests passing | 2 (8fb8851, b9321f5) + setup file commit |
 | 01-04 | 4 | ✅ Complete — UI + 6-step browser verify all PASS, 1 user row in Neon | 1 (24ee9b0) |
-| 01-05 | 5 | 🟡 Partial — CI YAML + base README written, push/deploy deferred | 1 (b841341) |
+| 01-05 | 5 | 🟡 Partial — CI YAML + README written + secrets set + CI green; Vercel deploy + README live demo deferred | 1 (b841341) |
 
 **Verification still green:**
 - `npm run typecheck` ✓

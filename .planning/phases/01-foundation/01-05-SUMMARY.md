@@ -55,16 +55,16 @@ completed_partial: 2026-05-06
 
 **CI workflow YAML and project README committed; 11 commits pushed to public GitHub repo at zeroyuekun/finance-tracker-ai. CI green, GitHub secrets, Vercel deploy, production OAuth callback, and live-demo README line all deferred until user provides external service credentials.**
 
-## Status: PARTIAL — code + push complete, blocked on user-driven service credentials
+## Status: PARTIAL — Tasks 1–3 complete (CI green); Tasks 4–6 deferred on Vercel deploy
 
 | Plan 05 Task | Status | Commit |
 |--------------|--------|--------|
 | Task 1: Create CI workflow YAML, write README, push to GitHub | ✅ Done | `b841341` + 11-commit `git push -u origin main` |
-| Task 2: Add 6 GitHub repository secrets | ⏸ DEFERRED — blocked on user credentials (Neon, Google OAuth, Resend) | — |
-| Task 3: Verify CI run is green on main | ⏸ DEFERRED — first push triggered a CI run that fails at Build step (no secrets); will rerun after Task 2 | — |
-| Task 4: Vercel import + 7 env vars + deploy + capture URL + Google OAuth production callback | ⏸ DEFERRED | — |
-| Task 5: 7-step end-to-end production verification | ⏸ DEFERRED | — |
-| Task 6: README live demo URL line + commit + push | ⏸ DEFERRED | — |
+| Task 2: Add 6 GitHub repository secrets | ✅ Done 2026-05-06T11:42Z — verified via `gh secret list` (DATABASE_URL, AUTH_SECRET, AUTH_GOOGLE_ID, AUTH_GOOGLE_SECRET, AUTH_RESEND_KEY, AUTH_EMAIL_FROM) | — (no commit; GitHub UI action) |
+| Task 3: Verify CI run is green on main | ✅ Done 2026-05-06T12:36Z — run `25433094060` for `b276232` completed success in 56s | — (validation only) |
+| Task 4: Vercel import + 7 env vars + deploy + capture URL + Google OAuth production callback | ⏸ DEFERRED — pending Path A (UI) vs Path B (CLI) decision | — |
+| Task 5: 7-step end-to-end production verification | ⏸ DEFERRED — blocked on Task 4 | — |
+| Task 6: README live demo URL line + commit + push | ⏸ DEFERRED — blocked on Task 4 | — |
 
 ## Performance
 
@@ -137,34 +137,13 @@ None for Task 1. CI YAML and README are byte-correct per the plan. The non-trivi
 
 ## Open Issues / Deferred Work
 
-### [BLOCKING] Task 2: Add 6 GitHub repository secrets
+### Task 2: Add 6 GitHub repository secrets — ✅ DONE 2026-05-06T11:42Z
 
-**Status:** Blocked on user completing Neon + Google OAuth + Resend.
+`gh secret list` confirms 6 secrets present: AUTH_EMAIL_FROM, AUTH_GOOGLE_ID, AUTH_GOOGLE_SECRET, AUTH_RESEND_KEY, AUTH_SECRET, DATABASE_URL. AUTH_TRUST_HOST correctly omitted (plain in YAML).
 
-**Resume protocol once user has all credentials in `.env.local`:**
+### Task 3: Trigger CI rerun + verify green — ✅ DONE 2026-05-06T12:36Z
 
-1. User opens `https://github.com/zeroyuekun/finance-tracker-ai/settings/secrets/actions`
-2. Adds 6 secrets (one at a time — no batch import) using values from `.env.local`:
-   - DATABASE_URL
-   - AUTH_SECRET
-   - AUTH_GOOGLE_ID
-   - AUTH_GOOGLE_SECRET
-   - AUTH_RESEND_KEY
-   - AUTH_EMAIL_FROM
-3. **DOES NOT** add AUTH_TRUST_HOST (plain text in YAML, intentional)
-4. Replies "secrets added" — Claude proceeds to Task 3.
-
-### [BLOCKING] Task 3: Trigger CI rerun + verify green
-
-**Resume protocol after Task 2:**
-
-1. Claude runs:
-   ```powershell
-   git commit --allow-empty -m "ci(01-05): trigger CI rerun after secrets added"
-   git push
-   ```
-2. Claude polls `gh run list --limit 1 --json status,conclusion` until status=completed.
-3. Expected: conclusion="success". If failure, fetch the run log via `gh run view --log-failed`.
+`gh run list` shows run `25433094060` for commit `b276232` (feat(01-04): live sign-in flow verified end-to-end) completed=success in 56s. Earlier 4 runs (pre-secrets) all failed at Build step with `DATABASE_URL is not set` as predicted; resolved as soon as the post-secrets push hit `main`.
 
 ### [BLOCKING] Task 4: Vercel import + env vars + deploy + Google OAuth production callback
 
@@ -218,10 +197,11 @@ Verified post-write:
 - `git log origin/main --oneline` shows ≥ 11 commits
 - typecheck + lint + test all green locally
 - One task commit (`b841341`) for the CI YAML + README work
-- **NOT verified (deferred):** GitHub secrets exist, CI green, Vercel deployed, production OAuth callback, end-to-end production sign-in, README live-demo line
+- **Verified 2026-05-06 session 3:** GitHub secrets exist (6 set 11:42Z), CI green on `main` (run 25433094060, success, 56s)
+- **NOT verified (deferred):** Vercel deployed, production OAuth callback, end-to-end production sign-in, README live-demo line
 
 ---
 *Phase: 01-foundation*
 *Plan: 05*
-*Status: partial-complete (1/6 tasks done; Tasks 2–6 deferred on user external setup)*
-*Last updated: 2026-05-06*
+*Status: partial-complete (3/6 tasks done; Tasks 4–6 deferred on Vercel deploy)*
+*Last updated: 2026-05-06 (session 3 — secrets + CI green confirmed)*

@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: paused-on-prereqs
-stopped_at: Plan 01-04 complete (Google OAuth + Resend magic-link + sign-out + middleware redirect all verified, 1 user row in Neon). Awaiting GitHub secrets → CI green → Vercel deploy. See DEFERRED.md.
-last_updated: "2026-05-06T11:40:00.000Z"
-last_activity: 2026-05-06 -- Plan 04 6-step browser verify all PASS; redirect_uri_mismatch resolved by switching GCP URIs from https → http
+status: paused-on-vercel-deploy
+stopped_at: Plan 01-05 Tasks 1–3 complete (CI YAML + README + 6 GitHub secrets + green CI on `main`). Awaiting Vercel import + 7 env vars + production OAuth callback + 7-step prod verification. See DEFERRED.md (Path A vs Path B decision pending).
+last_updated: "2026-05-06T21:55:00.000Z"
+last_activity: 2026-05-06 -- session 3 resume: confirmed 6 GitHub secrets set 11:42Z and last CI run green for b276232 at 12:36Z; refreshed DEFERRED + STATE + 01-05-SUMMARY
 progress:
   total_phases: 9
   completed_phases: 0
   total_plans: 5
   completed_plans: 3
-  percent: 33
+  percent: 40
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 
 ## Current Position
 
-Phase: 1 (Foundation) — PAUSED ON GITHUB SECRETS
-Plan: 3 fully complete (02 + 03 + 04), Plan 05 partially shipped (CI YAML committed; secrets/Vercel deferred).
-Status: Paused on user adding 6 GitHub repository secrets
-Last activity: 2026-05-06 -- Plan 04 verified end-to-end (Google OAuth + Resend magic-link + middleware + Neon user row)
+Phase: 1 (Foundation) — PAUSED ON VERCEL DEPLOY
+Plan: 3 fully complete (02 + 03 + 04). Plan 05 Tasks 1–3 complete (CI YAML + README + 6 GitHub secrets + green CI). Plan 05 Tasks 4–6 (Vercel + prod verify + README live demo) pending.
+Status: Paused — user decides Vercel deploy method (UI vs CLI)
+Last activity: 2026-05-06 -- session 3 resume confirmed CI is green; only Vercel deploy + prod verification + README live demo line remain for Phase 1 DoD
 
-Progress: [██████░░░░] ~33% (3 of 5 plans done; Plan 05 secrets/deploy remain)
+Progress: [████████░░] ~40% of Phase 1 plan-task units complete (3/5 plans + 3/6 of Plan 05 tasks)
 
 **See:** `.planning/phases/01-foundation/DEFERRED.md` for the resume punch list.
 
@@ -77,22 +77,23 @@ None at init. Note for `/gsd-plan-phase 1`: a 1196-line implementation plan alre
 |----------|------|--------|-------------|
 | API setup | GitHub repo + origin remote | ✅ Done (PUBLIC, user confirmed 2026-05-06) | 2026-05-06 |
 | API setup | Neon project + DATABASE_URL | ✅ Done 2026-05-06 (via neonctl init) | 2026-05-06 |
-| API setup | Google OAuth Client ID + Secret | Pending user | 2026-05-06 |
-| API setup | Vercel account linked to GitHub | Pending user | 2026-05-06 |
-| API setup | Resend API key + verified sender | Pending user | 2026-05-06 |
+| API setup | Google OAuth Client ID + Secret | ✅ Done 2026-05-06 | 2026-05-06 |
+| API setup | Vercel account linked to GitHub | ✅ Done — vercel CLI auth as `nevillezeng-4064` | 2026-05-06 |
+| API setup | Resend API key + verified sender | ✅ Done 2026-05-06 (`onboarding@resend.dev`) | 2026-05-06 |
 | Verification | `npm run db:push` to live Neon | ✅ Done 2026-05-06 (--force flag; 4 tables created) | 2026-05-06 |
-| Verification | 6-step local sign-in browser test | Blocked on auth provider keys | 2026-05-06 |
-| Deploy | `git push -u origin main` | Blocked on GitHub remote | 2026-05-06 |
-| Deploy | 6 GitHub repo secrets | Blocked on GitHub remote | 2026-05-06 |
-| Deploy | Vercel import + 7 env vars | Blocked on Vercel link | 2026-05-06 |
-| Deploy | Google OAuth production callback URL | Blocked on Vercel domain | 2026-05-06 |
-| Verification | 7-step production sign-in test | Blocked on Vercel deploy | 2026-05-06 |
-| Docs | README live demo URL line | Blocked on Vercel deploy | 2026-05-06 |
+| Verification | 6-step local sign-in browser test | ✅ Done 2026-05-06 — all 6 PASS, 1 user row in Neon | 2026-05-06 |
+| Deploy | `git push -u origin main` | ✅ Done 2026-05-06 (11 commits pushed, all subsequent commits up-to-date) | 2026-05-06 |
+| Deploy | 6 GitHub repo secrets | ✅ Done 2026-05-06T11:42Z (`gh secret list` confirms) | 2026-05-06 |
+| Deploy | CI green on `main` | ✅ Done 2026-05-06T12:36Z (run 25433094060, 56s, success) | 2026-05-06 |
+| Deploy | Vercel import + 7 env vars | ⏳ Pending — Path A (UI) vs Path B (CLI) decision | 2026-05-06 |
+| Deploy | Google OAuth production callback URL | ⏳ Blocked on Vercel domain | 2026-05-06 |
+| Verification | 7-step production sign-in test | ⏳ Blocked on Vercel deploy | 2026-05-06 |
+| Docs | README live demo URL line | ⏳ Blocked on Vercel deploy | 2026-05-06 |
 
 Full punch list with resume order: `.planning/phases/01-foundation/DEFERRED.md`
 
 ## Session Continuity
 
-Last session: 2026-05-06 — Plans 03/04/05 autonomous code-ahead
-Stopped at: All non-API code written, committed, verified. Awaiting user to complete 5 prereqs (GitHub, Neon, Google OAuth, Vercel, Resend), then resume.
+Last session: 2026-05-06 — session 3 resume after cursor closed; reconciled stale docs against live state (secrets + CI green confirmed via `gh`)
+Stopped at: Awaiting user choice for Vercel deploy method (Path A — Vercel UI as originally planned, or Path B — Vercel CLI with per-action authorization). All prereqs satisfied; only deploy + prod verify + README live demo line remain.
 Resume file: `.planning/phases/01-foundation/DEFERRED.md`
